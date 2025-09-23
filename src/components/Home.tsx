@@ -16,15 +16,15 @@ const Home: React.FC<HomeProps> = ({ setActiveTab }) => {
   const { user } = useUser();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-yellow-100 via-orange-100 to-blue-200 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4 sm:p-6 lg:p-8 flex flex-col items-center justify-center relative overflow-x-hidden">
+  <div className="min-h-screen bg-gradient-to-br from-yellow-100 via-orange-100 to-blue-200 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4 sm:p-6 lg:p-8 flex flex-col items-center justify-center relative overflow-x-hidden w-full">
 
 
       {/* Hero Section */}
-      <div className="flex flex-col lg:flex-row items-center justify-between w-full max-w-7xl gap-12 mb-16">
+  <div className="flex flex-col md:flex-row items-center justify-between w-full max-w-7xl gap-8 md:gap-12 mb-8 md:mb-16">
         {/* Left Content */}
-        <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left max-w-2xl">
+  <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left max-w-2xl w-full">
           <motion.h1 
-            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-orange-700 dark:text-yellow-300 mb-6 drop-shadow-lg leading-tight"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-orange-700 dark:text-yellow-100 mb-6 drop-shadow-lg leading-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -32,7 +32,7 @@ const Home: React.FC<HomeProps> = ({ setActiveTab }) => {
             Welcome to SolarTrack
           </motion.h1>
           <motion.p 
-            className="text-lg sm:text-xl text-blue-800 dark:text-blue-200 mb-8 leading-relaxed"
+            className="text-base sm:text-lg md:text-xl text-blue-800 dark:text-blue-200 mb-8 leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -73,10 +73,10 @@ const Home: React.FC<HomeProps> = ({ setActiveTab }) => {
         </div>
 
         {/* Right Animation Section */}
-        <div className="flex-1 flex items-center justify-center max-w-lg w-full">
+  <div className="flex-1 flex items-center justify-center max-w-lg w-full mt-8 md:mt-0">
           {/* Main Solar Animation */}
           <motion.div 
-            className="w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 bg-white/70 dark:bg-gray-800/70 rounded-3xl shadow-xl backdrop-blur-sm border border-white/20 dark:border-gray-700/20 flex items-center justify-center overflow-hidden"
+            className="w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 bg-white/70 dark:bg-gray-700/70 rounded-3xl shadow-xl backdrop-blur-sm border border-white/20 dark:border-gray-600/20 flex items-center justify-center overflow-hidden"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.6 }}
@@ -91,12 +91,12 @@ const Home: React.FC<HomeProps> = ({ setActiveTab }) => {
       </div>
 
       {/* Additional Content Section */}
-      <div className="w-full max-w-7xl mb-16">
-        <div className="flex flex-col lg:flex-row items-center gap-12">
+      <div className="w-full max-w-7xl mb-8 md:mb-16">
+        <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 w-full">
           {/* Left Side with Secondary Lottie */}
-          <div className="flex-1 flex justify-center lg:justify-start">
+          <div className="flex-1 flex justify-center md:justify-start w-full">
             <motion.div 
-              className="w-80 h-80 sm:w-96 sm:h-96 lg:w-[420px] lg:h-[420px]"
+              className="w-56 h-56 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[420px] lg:h-[420px]"
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 1.2 }}
@@ -112,7 +112,7 @@ const Home: React.FC<HomeProps> = ({ setActiveTab }) => {
           {/* Right Side with Content */}
           <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left">
             <motion.h2 
-              className="text-3xl sm:text-4xl font-bold text-orange-700 dark:text-yellow-300 mb-6"
+              className="text-3xl sm:text-4xl font-bold text-orange-700 dark:text-yellow-100 mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.4 }}
@@ -133,21 +133,21 @@ const Home: React.FC<HomeProps> = ({ setActiveTab }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.8 }}
             >
-              <div className="flex items-center space-x-3 p-4 bg-white/50 dark:bg-gray-800/50 rounded-lg backdrop-blur-sm">
+              <div className="flex items-center space-x-3 p-4 bg-white/50 dark:bg-gray-700/50 rounded-lg backdrop-blur-sm">
                 <span className="text-2xl">🔋</span>
-                <span className="text-gray-700 dark:text-gray-200 font-medium">Energy Storage</span>
+                <span className="text-gray-700 dark:text-gray-300 font-medium">Energy Storage</span>
               </div>
-              <div className="flex items-center space-x-3 p-4 bg-white/50 dark:bg-gray-800/50 rounded-lg backdrop-blur-sm">
+              <div className="flex items-center space-x-3 p-4 bg-white/50 dark:bg-gray-700/50 rounded-lg backdrop-blur-sm">
                 <span className="text-2xl">🌱</span>
-                <span className="text-gray-700 dark:text-gray-200 font-medium">Eco-Friendly</span>
+                <span className="text-gray-700 dark:text-gray-300 font-medium">Eco-Friendly</span>
               </div>
-              <div className="flex items-center space-x-3 p-4 bg-white/50 dark:bg-gray-800/50 rounded-lg backdrop-blur-sm">
+              <div className="flex items-center space-x-3 p-4 bg-white/50 dark:bg-gray-700/50 rounded-lg backdrop-blur-sm">
                 <span className="text-2xl">💰</span>
-                <span className="text-gray-700 dark:text-gray-200 font-medium">Cost Savings</span>
+                <span className="text-gray-700 dark:text-gray-300 font-medium">Cost Savings</span>
               </div>
-              <div className="flex items-center space-x-3 p-4 bg-white/50 dark:bg-gray-800/50 rounded-lg backdrop-blur-sm">
+              <div className="flex items-center space-x-3 p-4 bg-white/50 dark:bg-gray-700/50 rounded-lg backdrop-blur-sm">
                 <span className="text-2xl">📱</span>
-                <span className="text-gray-700 dark:text-gray-200 font-medium">Mobile Ready</span>
+                <span className="text-gray-700 dark:text-gray-300 font-medium">Mobile Ready</span>
               </div>
             </motion.div>
           </div>
@@ -164,8 +164,8 @@ const Home: React.FC<HomeProps> = ({ setActiveTab }) => {
           whileHover={{ y: -5 }}
         >
           <span className="text-4xl mb-4 animate-bounce">🌞</span>
-          <h2 className="font-bold text-xl mb-3 text-orange-700 dark:text-yellow-300">Live Monitoring</h2>
-          <p className="text-gray-700 dark:text-gray-200 text-center leading-relaxed">Track your solar panel output and system status in real time, anytime, anywhere.</p>
+          <h2 className="font-bold text-xl mb-3 text-orange-700 dark:text-yellow-100">Live Monitoring</h2>
+          <p className="text-gray-700 dark:text-gray-300 text-center leading-relaxed">Track your solar panel output and system status in real time, anytime, anywhere.</p>
         </motion.div>
 
         <motion.div 
@@ -173,8 +173,8 @@ const Home: React.FC<HomeProps> = ({ setActiveTab }) => {
           whileHover={{ y: -5 }}
         >
           <span className="text-4xl mb-4 animate-pulse">📊</span>
-          <h2 className="font-bold text-xl mb-3 text-blue-700 dark:text-yellow-300">Advanced Analytics</h2>
-          <p className="text-gray-700 dark:text-gray-200 text-center leading-relaxed">Visualize energy production, consumption, and savings with interactive charts and reports.</p>
+          <h2 className="font-bold text-xl mb-3 text-blue-700 dark:text-yellow-100">Advanced Analytics</h2>
+          <p className="text-gray-700 dark:text-gray-300 text-center leading-relaxed">Visualize energy production, consumption, and savings with interactive charts and reports.</p>
         </motion.div>
 
         <motion.div 
@@ -182,8 +182,8 @@ const Home: React.FC<HomeProps> = ({ setActiveTab }) => {
           whileHover={{ y: -5 }}
         >
           <span className="text-4xl mb-4 animate-bounce">⚡</span>
-          <h2 className="font-bold text-xl mb-3 text-orange-700 dark:text-yellow-300">Smart Alerts</h2>
-          <p className="text-gray-700 dark:text-gray-200 text-center leading-relaxed">Get instant notifications for system issues, maintenance reminders, and performance tips.</p>
+          <h2 className="font-bold text-xl mb-3 text-orange-700 dark:text-yellow-100">Smart Alerts</h2>
+          <p className="text-gray-700 dark:text-gray-300 text-center leading-relaxed">Get instant notifications for system issues, maintenance reminders, and performance tips.</p>
         </motion.div>
       </motion.div>
     </div>

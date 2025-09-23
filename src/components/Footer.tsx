@@ -20,18 +20,18 @@ const Footer: React.FC = () => (
       </div>
       {/* Quick Links */}
       <div className="flex flex-col items-center">
-        <span className="font-semibold text-gray-700 dark:text-gray-200 mb-2">Quick Links</span>
+  <span className="font-semibold text-gray-700 dark:text-gray-300 mb-2">Quick Links</span>
         <nav className="flex flex-col space-y-1 text-sm">
-          <a href="#" className="hover:text-orange-600 dark:hover:text-yellow-300 transition-colors">Home</a>
-          <a href="#" className="hover:text-orange-600 dark:hover:text-yellow-300 transition-colors">Dashboard</a>
-          <a href="#" className="hover:text-orange-600 dark:hover:text-yellow-300 transition-colors">Profile</a>
-          <a href="#" className="hover:text-orange-600 dark:hover:text-yellow-300 transition-colors">Settings</a>
-          <a href="#" className="hover:text-orange-600 dark:hover:text-yellow-300 transition-colors">Alerts</a>
+          <a href="#" className="text-gray-700 dark:text-gray-200 hover:text-orange-600 dark:hover:text-yellow-100 transition-colors">Home</a>
+          <a href="#" className="text-gray-700 dark:text-gray-200 hover:text-orange-600 dark:hover:text-yellow-100 transition-colors">Dashboard</a>
+          <a href="#" className="text-gray-700 dark:text-gray-200 hover:text-orange-600 dark:hover:text-yellow-100 transition-colors">Profile</a>
+          <a href="#" className="text-gray-700 dark:text-gray-200 hover:text-orange-600 dark:hover:text-yellow-100 transition-colors">Settings</a>
+          <a href="#" className="text-gray-700 dark:text-gray-200 hover:text-orange-600 dark:hover:text-yellow-100 transition-colors">Alerts</a>
         </nav>
       </div>
       {/* Contact Info */}
       <div className="flex flex-col items-center md:items-end">
-        <span className="font-semibold text-gray-700 dark:text-gray-200 mb-2">Contact</span>
+  <span className="font-semibold text-gray-700 dark:text-gray-300 mb-2">Contact</span>
         <a href="mailto:support@solartrack.com" className="text-sm text-blue-700 dark:text-blue-300 hover:underline">support@solartrack.com</a>
         <span className="text-xs text-gray-500 dark:text-gray-400 mt-2">We'd love to hear your feedback!</span>
       </div>

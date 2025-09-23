@@ -101,7 +101,7 @@ const Login: React.FC<LoginProps> = ({ setActiveTab }) => {
             </motion.div>
             
             <motion.h1 
-              className="text-4xl sm:text-5xl font-extrabold text-orange-700 dark:text-yellow-300 mb-4 drop-shadow-lg"
+              className="text-4xl sm:text-5xl font-extrabold text-orange-700 dark:text-yellow-100 mb-4 drop-shadow-lg"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
@@ -158,7 +158,7 @@ const Login: React.FC<LoginProps> = ({ setActiveTab }) => {
                   onClick={() => setActiveAuthTab("login")}
                   className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-all duration-300 ${
                     activeAuthTab === "login" 
-                      ? "bg-white dark:bg-gray-700 text-orange-600 dark:text-yellow-300 shadow-md" 
+                      ? "bg-white dark:bg-gray-700 text-orange-600 dark:text-yellow-100 shadow-md" 
                       : "text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-yellow-300"
                   }`}
                 >
@@ -168,7 +168,7 @@ const Login: React.FC<LoginProps> = ({ setActiveTab }) => {
                   onClick={() => setActiveAuthTab("signup")}
                   className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-all duration-300 ${
                     activeAuthTab === "signup" 
-                      ? "bg-white dark:bg-gray-700 text-orange-600 dark:text-yellow-300 shadow-md" 
+                      ? "bg-white dark:bg-gray-700 text-orange-600 dark:text-yellow-100 shadow-md" 
                       : "text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-yellow-300"
                   }`}
                 >
@@ -178,7 +178,7 @@ const Login: React.FC<LoginProps> = ({ setActiveTab }) => {
 
               {/* Form Header */}
               <div className="text-center mb-6">
-                <h2 className="text-3xl font-bold text-orange-700 dark:text-yellow-300 mb-2">
+                <h2 className="text-3xl font-bold text-orange-700 dark:text-yellow-100 mb-2">
                   {activeAuthTab === "login" ? "Welcome Back!" : "Join SolarTrack"}
                 </h2>
                 <p className="text-gray-600 dark:text-gray-300">

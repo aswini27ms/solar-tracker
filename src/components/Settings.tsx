@@ -22,7 +22,7 @@ const Settings: React.FC = () => {
         {/* Left Content */}
         <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left max-w-2xl">
           <motion.h1 
-            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-orange-700 dark:text-yellow-300 mb-6 drop-shadow-lg leading-tight"
+            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-orange-700 dark:text-yellow-100 mb-6 drop-shadow-lg leading-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -73,7 +73,7 @@ const Settings: React.FC = () => {
             >
               <div className="flex items-center mb-6">
                 <span className="text-4xl mr-4">🔌</span>
-                <h2 className="font-bold text-2xl text-orange-700 dark:text-yellow-300">Grid Interaction</h2>
+                <h2 className="font-bold text-2xl text-orange-700 dark:text-yellow-100">Grid Interaction</h2>
               </div>
               <div className="space-y-6">
                 <div className="flex items-start space-x-3 p-4 bg-white/60 dark:bg-gray-800/60 rounded-xl">
@@ -118,7 +118,7 @@ const Settings: React.FC = () => {
             >
               <div className="flex items-center mb-6">
                 <span className="text-4xl mr-4">🔔</span>
-                <h2 className="font-bold text-2xl text-blue-700 dark:text-yellow-300">Notifications</h2>
+                <h2 className="font-bold text-2xl text-blue-700 dark:text-yellow-100">Notifications</h2>
               </div>
               <div className="space-y-6">
                 <div className="space-y-4">
@@ -161,7 +161,7 @@ const Settings: React.FC = () => {
           {/* Right Side Content */}
           <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left">
             <motion.h2 
-              className="text-3xl sm:text-4xl font-bold text-orange-700 dark:text-yellow-300 mb-6"
+              className="text-3xl sm:text-4xl font-bold text-orange-700 dark:text-yellow-100 mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.6 }}
@@ -210,7 +210,7 @@ const Settings: React.FC = () => {
             >
               <div className="flex items-center mb-4">
                 <span className="text-3xl mr-3">❓</span>
-                <h2 className="font-bold text-xl text-orange-700 dark:text-yellow-300">Help & FAQ</h2>
+                <h2 className="font-bold text-xl text-orange-700 dark:text-yellow-100">Help & FAQ</h2>
               </div>
               <p className="text-gray-700 dark:text-gray-200 mb-4 leading-relaxed">
                 Need assistance? Explore our frequently asked questions or contact support for help with your solar dashboard.

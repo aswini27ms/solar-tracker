@@ -14,7 +14,7 @@ import Footer from './components/Footer';
 
 
 function App() {
-  const [activeTab, setActiveTab] = useState('dashboard');
+  const [activeTab, setActiveTab] = useState('home');
 
   const renderActiveComponent = () => {
     switch (activeTab) {

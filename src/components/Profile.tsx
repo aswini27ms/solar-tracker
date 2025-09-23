@@ -98,7 +98,7 @@ const Profile: React.FC = () => {
                     type="text"
                     value={user?.name || "Solar User"}
                     readOnly
-                    className="text-3xl font-bold bg-transparent border-b-2 border-orange-500 text-orange-700 dark:text-yellow-300 focus:outline-none cursor-not-allowed"
+                    className="text-3xl font-bold bg-transparent border-b-2 border-orange-500 text-orange-700 dark:text-yellow-100 focus:outline-none cursor-not-allowed"
                   />
                   <textarea
                     value={profile.bio}
@@ -109,7 +109,7 @@ const Profile: React.FC = () => {
                 </div>
               ) : (
                 <>
-                  <h1 className="text-3xl font-bold text-orange-700 dark:text-yellow-300 mb-2">{user?.name || "Solar User"}</h1>
+                  <h1 className="text-3xl font-bold text-orange-700 dark:text-yellow-100 mb-2">{user?.name || "Solar User"}</h1>
                   <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">{profile.bio}</p>
                 </>
               )}
@@ -185,7 +185,7 @@ const Profile: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <h3 className="text-2xl font-bold text-orange-700 dark:text-yellow-300 mb-6 flex items-center">
+            <h3 className="text-2xl font-bold text-orange-700 dark:text-yellow-100 mb-6 flex items-center">
               <Award className="w-6 h-6 mr-3" />
               Achievements
             </h3>
@@ -216,7 +216,7 @@ const Profile: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            <h3 className="text-2xl font-bold text-blue-700 dark:text-yellow-300 mb-6">Recent Activities</h3>
+            <h3 className="text-2xl font-bold text-blue-700 dark:text-yellow-100 mb-6">Recent Activities</h3>
             <div className="space-y-4">
               {recentActivities.map((activity) => (
                 <div key={activity.id} className="flex items-start space-x-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
