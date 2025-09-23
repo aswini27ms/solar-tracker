@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useUser } from '../contexts/UserContext';
 import { motion } from 'framer-motion';
 import { 
@@ -10,7 +10,8 @@ import {
   AlertTriangle, 
   Settings, 
   User, 
-  LogIn 
+  LogIn,
+  Menu
 } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
@@ -36,6 +37,8 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
     { id: 'login', label: 'Login', icon: LogIn },
   ];
 
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
     <motion.nav 
       initial={{ y: -100 }}
@@ -58,6 +61,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
           </motion.div>
 
           {/* Navigation Items */}
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <motion.button
@@ -75,8 +79,6 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
                 <span>{item.label}</span>
               </motion.button>
             ))}
-            
-            {/* Show Logout button only when user is logged in */}
             {user && (
               <motion.button
                 key="logout"
@@ -109,14 +111,47 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
             <motion.button
               className="p-2 rounded-lg text-gray-600 dark:text-gray-300"
               whileTap={{ scale: 0.9 }}
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Open navigation menu"
             >
-              <BarChart3 className="w-6 h-6" />
+              <Menu className="w-6 h-6" />
             </motion.button>
           </div>
         </div>
+        {/* Mobile Navigation Drawer */}
+        {mobileOpen && (
+          <div className="md:hidden absolute left-0 right-0 top-16 bg-white dark:bg-gray-900 shadow-lg border-t border-gray-200 dark:border-gray-800 z-50">
+            <div className="flex flex-col items-stretch p-4 space-y-2">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => { setActiveTab(item.id); setMobileOpen(false); }}
+                  className={`flex items-center space-x-2 px-4 py-3 rounded-lg text-base font-medium transition-colors ${
+                    activeTab === item.id
+                      ? 'text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20'
+                      : 'text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400'
+                  }`}
+                >
+                  <item.icon className="w-5 h-5" />
+                  <span>{item.label}</span>
+                </button>
+              ))}
+              {user && (
+                <button
+                  key="logout"
+                  onClick={() => { setUser(null as any); setActiveTab('login'); setMobileOpen(false); }}
+                  className="flex items-center space-x-2 px-4 py-3 rounded-lg text-base font-medium transition-colors text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-800"
+                >
+                  <LogIn className="w-5 h-5" />
+                  <span>Logout</span>
+                </button>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </motion.nav>
   );
-};
+}
 
 export default Navbar;

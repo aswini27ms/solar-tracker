@@ -53,7 +53,7 @@ function App() {
               {renderActiveComponent()}
             </motion.div>
           </AnimatePresence>
-          <Footer />
+          <Footer setActiveTab={setActiveTab} />
         </div>
       </ThemeProvider>
     </UserProvider>
