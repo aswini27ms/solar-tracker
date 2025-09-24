@@ -1,10 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, TrendingUp, BarChart3, PieChart } from 'lucide-react';
 import ChartCard from './ChartCard';
-import { mockSolarData } from '../data/mockData';
 
 const Analytics: React.FC = () => {
+  const [selectedPeriod, setSelectedPeriod] = useState('Month');
+
+  // Data for different time periods
+  const dailyData = [
+    { time: '00:00', energy: 0, efficiency: 0 },
+    { time: '06:00', energy: 120, efficiency: 45.2 },
+    { time: '09:00', energy: 380, efficiency: 78.5 },
+    { time: '12:00', energy: 520, efficiency: 94.7 },
+    { time: '15:00', energy: 480, efficiency: 91.2 },
+    { time: '18:00', energy: 180, efficiency: 62.3 },
+    { time: '21:00', energy: 0, efficiency: 0 }
+  ];
+
+  const weeklyData = [
+    { week: 'Mon', energy: 1250, efficiency: 89.5 },
+    { week: 'Tue', energy: 1320, efficiency: 91.2 },
+    { week: 'Wed', energy: 1180, efficiency: 88.7 },
+    { week: 'Thu', energy: 1450, efficiency: 93.4 },
+    { week: 'Fri', energy: 1380, efficiency: 92.1 },
+    { week: 'Sat', energy: 980, efficiency: 85.6 },
+    { week: 'Sun', energy: 850, efficiency: 82.3 }
+  ];
+
   const monthlyData = [
     { month: 'Jan', energy: 890, efficiency: 88.5 },
     { month: 'Feb', energy: 950, efficiency: 89.2 },
@@ -19,6 +40,57 @@ const Analytics: React.FC = () => {
     { month: 'Nov', energy: 980, efficiency: 89.8 },
     { month: 'Dec', energy: 850, efficiency: 88.1 }
   ];
+
+  const yearlyData = [
+    { year: '2019', energy: 12100, efficiency: 87.2 },
+    { year: '2020', energy: 12850, efficiency: 88.9 },
+    { year: '2021', energy: 13200, efficiency: 90.1 },
+    { year: '2022', energy: 13800, efficiency: 91.5 },
+    { year: '2023', energy: 14470, efficiency: 92.1 }
+  ];
+
+  // Get current data based on selected period
+  const getCurrentData = () => {
+    switch (selectedPeriod) {
+      case 'Day':
+        return {
+          data: dailyData,
+          xAxisKey: 'time',
+          title: 'Daily Energy Production',
+          subtitle: 'Energy generation throughout the day'
+        };
+      case 'Week':
+        return {
+          data: weeklyData,
+          xAxisKey: 'week',
+          title: 'Weekly Energy Production',
+          subtitle: 'Energy generation over the past 7 days'
+        };
+      case 'Month':
+        return {
+          data: monthlyData,
+          xAxisKey: 'month',
+          title: 'Monthly Energy Production',
+          subtitle: 'Energy generation over the past 12 months'
+        };
+      case 'Year':
+        return {
+          data: yearlyData,
+          xAxisKey: 'year',
+          title: 'Yearly Energy Production',
+          subtitle: 'Energy generation over the past 5 years'
+        };
+      default:
+        return {
+          data: monthlyData,
+          xAxisKey: 'month',
+          title: 'Monthly Energy Production',
+          subtitle: 'Energy generation over the past 12 months'
+        };
+    }
+  };
+
+  const currentData = getCurrentData();
 
   const yearlyStats = [
     { metric: 'Total Energy Generated', value: '14.47', unit: 'MWh', change: '+15.2%' },
@@ -60,7 +132,12 @@ const Analytics: React.FC = () => {
               key={period}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-4 py-2 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-orange-50 dark:hover:bg-orange-900/20 hover:text-orange-600 dark:hover:text-orange-400 hover:border-orange-200 dark:hover:border-orange-800 transition-all"
+              onClick={() => setSelectedPeriod(period)}
+              className={`px-4 py-2 rounded-lg border transition-all ${
+                selectedPeriod === period
+                  ? 'bg-orange-500 text-white border-orange-500'
+                  : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-orange-50 dark:hover:bg-orange-900/20 hover:text-orange-600 dark:hover:text-orange-400 hover:border-orange-200 dark:hover:border-orange-800'
+              }`}
             >
               {period}
             </motion.button>
@@ -99,12 +176,12 @@ const Analytics: React.FC = () => {
         {/* Charts */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           <ChartCard
-            title="Monthly Energy Production"
-            subtitle="Energy generation over the past 12 months"
-            data={monthlyData}
+            title={currentData.title}
+            subtitle={currentData.subtitle}
+            data={currentData.data}
             type="bar"
             dataKey="energy"
-            xAxisKey="month"
+            xAxisKey={currentData.xAxisKey}
             color="#f97316"
             delay={0.6}
           />
@@ -112,10 +189,10 @@ const Analytics: React.FC = () => {
           <ChartCard
             title="Efficiency Trend"
             subtitle="System efficiency over time"
-            data={monthlyData}
+            data={currentData.data}
             type="line"
             dataKey="efficiency"
-            xAxisKey="month"
+            xAxisKey={currentData.xAxisKey}
             color="#22c55e"
             delay={0.7}
           />

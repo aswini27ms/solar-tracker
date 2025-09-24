@@ -2,11 +2,11 @@ import React from "react";
 import { Sun } from "lucide-react";
 
 interface FooterProps {
+  activeTab: string;
   setActiveTab: (tab: string) => void;
 }
 
-
-const Footer: React.FC<FooterProps> = ({ setActiveTab }) => (
+const Footer: React.FC<FooterProps> = ({ activeTab, setActiveTab }) => (
   <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-10 mt-8">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
       {/* Brand & Mission */}
@@ -22,15 +22,58 @@ const Footer: React.FC<FooterProps> = ({ setActiveTab }) => (
           Clean energy, bright future.
         </p>
       </div>
-      {/* Quick Links */}
-      <div className="flex flex-col items-center">
-  <span className="font-semibold text-gray-700 dark:text-gray-300 mb-2">Quick Links</span>
-        <nav className="flex flex-col space-y-1 text-sm w-full">
-          <button onClick={() => setActiveTab('home')} className="text-left text-gray-700 dark:text-gray-200 hover:text-orange-600 dark:hover:text-yellow-100 transition-colors w-full py-1">Home</button>
-          <button onClick={() => setActiveTab('dashboard')} className="text-left text-gray-700 dark:text-gray-200 hover:text-orange-600 dark:hover:text-yellow-100 transition-colors w-full py-1">Dashboard</button>
-          <button onClick={() => setActiveTab('profile')} className="text-left text-gray-700 dark:text-gray-200 hover:text-orange-600 dark:hover:text-yellow-100 transition-colors w-full py-1">Profile</button>
-          <button onClick={() => setActiveTab('settings')} className="text-left text-gray-700 dark:text-gray-200 hover:text-orange-600 dark:hover:text-yellow-100 transition-colors w-full py-1">Settings</button>
-          <button onClick={() => setActiveTab('alerts')} className="text-left text-gray-700 dark:text-gray-200 hover:text-orange-600 dark:hover:text-yellow-100 transition-colors w-full py-1">Alerts</button>
+  {/* Quick Links */}
+  <div className="flex flex-col items-center">
+        <span className="font-semibold text-gray-700 dark:text-gray-300 mb-2">Quick Links</span>
+        <nav className="flex flex-col space-y-1 text-sm">
+          <button 
+            onClick={() => setActiveTab('home')}
+            className={`text-left transition-colors ${activeTab === 'home' 
+              ? 'text-orange-600 dark:text-yellow-100 font-semibold' 
+              : 'text-gray-700 dark:text-gray-200 hover:text-orange-600 dark:hover:text-yellow-100'}`}
+          >
+            Home
+          </button>
+          <button 
+            onClick={() => setActiveTab('dashboard')}
+            className={`text-left transition-colors ${activeTab === 'dashboard' 
+              ? 'text-orange-600 dark:text-yellow-100 font-semibold' 
+              : 'text-gray-700 dark:text-gray-200 hover:text-orange-600 dark:hover:text-yellow-100'}`}
+          >
+            Dashboard
+          </button>
+          <button 
+            onClick={() => setActiveTab('profile')}
+            className={`text-left transition-colors ${activeTab === 'profile' 
+              ? 'text-orange-600 dark:text-yellow-100 font-semibold' 
+              : 'text-gray-700 dark:text-gray-200 hover:text-orange-600 dark:hover:text-yellow-100'}`}
+          >
+            Profile
+          </button>
+          <button 
+            onClick={() => setActiveTab('settings')}
+            className={`text-left transition-colors ${activeTab === 'settings' 
+              ? 'text-orange-600 dark:text-yellow-100 font-semibold' 
+              : 'text-gray-700 dark:text-gray-200 hover:text-orange-600 dark:hover:text-yellow-100'}`}
+          >
+            Settings
+          </button>
+          <button 
+            onClick={() => setActiveTab('alerts')}
+            className={`text-left transition-colors ${activeTab === 'alerts' 
+              ? 'text-orange-600 dark:text-yellow-100 font-semibold' 
+              : 'text-gray-700 dark:text-gray-200 hover:text-orange-600 dark:hover:text-yellow-100'}`}
+          >
+            Alerts
+          </button>
+          <button 
+            onClick={() => setActiveTab('usermanual')}
+            className={`text-left transition-colors ${activeTab === 'usermanual' 
+              ? 'text-orange-600 dark:text-yellow-100 font-semibold' 
+              : 'text-gray-700 dark:text-gray-200 hover:text-orange-600 dark:hover:text-yellow-100'}`}
+          >
+            User Manual
+          </button>
         </nav>
       </div>
       {/* Contact Info */}

@@ -11,6 +11,7 @@ import Settings from './components/Settings';
 import Login from './components/Login';
 import Profile from './components/Profile';
 import Footer from './components/Footer';
+import UserManual from './components/UserManual';
 
 
 function App() {
@@ -32,6 +33,8 @@ function App() {
         return <Profile />;
       case 'login':
         return <Login setActiveTab={setActiveTab} />;
+      case 'usermanual':
+        return <UserManual />;
       default:
         return <Dashboard />;
     }
@@ -53,7 +56,7 @@ function App() {
               {renderActiveComponent()}
             </motion.div>
           </AnimatePresence>
-          <Footer setActiveTab={setActiveTab} />
+          <Footer activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>
       </ThemeProvider>
     </UserProvider>

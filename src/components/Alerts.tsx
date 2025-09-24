@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { AlertTriangle, Info, CheckCircle, Clock } from "lucide-react";
+import AlertAnimation from "./AlertAnimation";
 
 const alerts = [
   {
@@ -50,7 +51,8 @@ const Alerts: React.FC = () => {
   };
 
   return (
-  <div className="min-h-screen bg-gradient-to-br from-yellow-100 via-orange-100 to-blue-200 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4 sm:p-6 lg:p-8 flex flex-col items-center">
+    <div className="min-h-screen bg-gradient-to-br from-yellow-100 via-orange-100 to-blue-200 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4 sm:p-6 lg:p-8 flex flex-col items-center">
+      <AlertAnimation className="w-32 h-32 mb-2" />
       <div className="max-w-2xl w-full mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Zap, Battery, Gauge, TrendingUp, Leaf, Sun, Download, FileText } from 'lucide-react';
+import { Zap, Battery, Gauge, Leaf, Download, FileText } from 'lucide-react';
 import StatCard from './StatCard';
 import ChartCard from './ChartCard';
 import AlertsPanel from './AlertsPanel';
@@ -31,9 +31,187 @@ const Dashboard: React.FC = () => {
   }, []);
 
   const handleDownloadReport = (format: 'csv' | 'pdf') => {
-    // Simulate download
-    const filename = `solar-report-${new Date().toISOString().split('T')[0]}.${format}`;
-    alert(`Downloading ${filename}...`);
+    const timestamp = new Date().toISOString().split('T')[0];
+    const filename = `solar-report-${timestamp}`;
+    
+    if (format === 'csv') {
+      downloadCSV(filename);
+    } else if (format === 'pdf') {
+      downloadPDF(filename);
+    }
+  };
+
+  const downloadCSV = (filename: string) => {
+    // Prepare CSV data
+    const csvData = [
+      ['Solar System Report', ''],
+      ['Generated Date', new Date().toLocaleString()],
+      ['', ''],
+      ['Current Statistics', ''],
+      ['Metric', 'Value', 'Unit'],
+      ['Power Output', mockSolarData.currentStats.powerOutput, 'kW'],
+      ['Voltage', mockSolarData.currentStats.voltage, 'V'],
+      ['Current', mockSolarData.currentStats.current, 'A'],
+      ['Efficiency', mockSolarData.currentStats.efficiency, '%'],
+      ['Battery Level', mockSolarData.currentStats.batteryLevel, '%'],
+      ['Irradiance', mockSolarData.currentStats.irradiance, 'W/m²'],
+      ['Temperature', mockSolarData.currentStats.temperature, '°C'],
+      ['CO₂ Saved Today', mockSolarData.currentStats.co2Saved, 'tons'],
+      ['Energy Generated Today', mockSolarData.currentStats.energyGenerated, 'kWh'],
+      ['', ''],
+      ['Live Power Data', ''],
+      ['Time', 'Power (kW)'],
+      ...liveData.map(item => [item.time, item.power]),
+      ['', ''],
+      ['Weekly Energy Production', ''],
+      ['Day', 'Energy (kWh)', 'Efficiency (%)'],
+      ...mockSolarData.weeklyData.map(item => [item.day, item.energy, item.efficiency]),
+      ['', ''],
+      ['Alerts', ''],
+      ['Type', 'Message', 'Timestamp', 'Severity'],
+      ...mockSolarData.alerts.map(alert => [alert.type, alert.message, alert.timestamp, alert.severity]),
+      ['', ''],
+      ['Weather Information', ''],
+      ['Current Condition', mockSolarData.weather.current.condition, ''],
+      ['Temperature', mockSolarData.weather.current.temperature, '°C'],
+      ['Humidity', mockSolarData.weather.current.humidity, '%'],
+      ['Wind Speed', mockSolarData.weather.current.windSpeed, 'km/h'],
+      ['', ''],
+      ['Forecast', ''],
+      ['Day', 'Condition', 'High (°C)', 'Low (°C)'],
+      ...mockSolarData.weather.forecast.map(forecast => [forecast.day, forecast.condition, forecast.high, forecast.low])
+    ];
+
+    // Convert to CSV string
+    const csvString = csvData.map(row => 
+      row.map(field => `"${field}"`).join(',')
+    ).join('\n');
+
+    // Create blob and download
+    const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', `${filename}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const downloadPDF = (filename: string) => {
+    // Create a simple HTML content for PDF
+    const htmlContent = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Solar System Report</title>
+        <style>
+          body { font-family: Arial, sans-serif; margin: 20px; }
+          h1 { color: #f97316; }
+          h2 { color: #333; border-bottom: 2px solid #f97316; padding-bottom: 5px; }
+          table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+          th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+          th { background-color: #f97316; color: white; }
+          .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 20px 0; }
+          .stat-card { border: 1px solid #ddd; padding: 15px; border-radius: 5px; }
+          .alert { padding: 10px; margin: 5px 0; border-radius: 3px; }
+          .alert-warning { background-color: #fff3cd; border: 1px solid #ffeaa7; }
+          .alert-info { background-color: #d1ecf1; border: 1px solid #bee5eb; }
+          .alert-success { background-color: #d4edda; border: 1px solid #c3e6cb; }
+        </style>
+      </head>
+      <body>
+        <h1>Solar System Report</h1>
+        <p><strong>Generated Date:</strong> ${new Date().toLocaleString()}</p>
+        
+        <h2>Current Statistics</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <strong>Power Output:</strong> ${mockSolarData.currentStats.powerOutput} kW<br>
+            <strong>Voltage:</strong> ${mockSolarData.currentStats.voltage} V<br>
+            <strong>Current:</strong> ${mockSolarData.currentStats.current} A
+          </div>
+          <div class="stat-card">
+            <strong>Efficiency:</strong> ${mockSolarData.currentStats.efficiency}%<br>
+            <strong>Battery Level:</strong> ${mockSolarData.currentStats.batteryLevel}%<br>
+            <strong>Temperature:</strong> ${mockSolarData.currentStats.temperature}°C
+          </div>
+          <div class="stat-card">
+            <strong>CO₂ Saved Today:</strong> ${mockSolarData.currentStats.co2Saved} tons<br>
+            <strong>Energy Generated Today:</strong> ${mockSolarData.currentStats.energyGenerated} kWh
+          </div>
+          <div class="stat-card">
+            <strong>Irradiance:</strong> ${mockSolarData.currentStats.irradiance} W/m²
+          </div>
+        </div>
+        
+        <h2>Live Power Data</h2>
+        <table>
+          <thead>
+            <tr><th>Time</th><th>Power (kW)</th></tr>
+          </thead>
+          <tbody>
+            ${liveData.map(item => `<tr><td>${item.time}</td><td>${item.power}</td></tr>`).join('')}
+          </tbody>
+        </table>
+        
+        <h2>Weekly Energy Production</h2>
+        <table>
+          <thead>
+            <tr><th>Day</th><th>Energy (kWh)</th><th>Efficiency (%)</th></tr>
+          </thead>
+          <tbody>
+            ${mockSolarData.weeklyData.map(item => `<tr><td>${item.day}</td><td>${item.energy}</td><td>${item.efficiency}</td></tr>`).join('')}
+          </tbody>
+        </table>
+        
+        <h2>Alerts</h2>
+        ${mockSolarData.alerts.map(alert => 
+          `<div class="alert alert-${alert.type}">
+            <strong>${alert.type.toUpperCase()}:</strong> ${alert.message}<br>
+            <small>${alert.timestamp} - Severity: ${alert.severity}</small>
+          </div>`
+        ).join('')}
+        
+        <h2>Weather Information</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <strong>Current Condition:</strong> ${mockSolarData.weather.current.condition}<br>
+            <strong>Temperature:</strong> ${mockSolarData.weather.current.temperature}°C<br>
+            <strong>Humidity:</strong> ${mockSolarData.weather.current.humidity}%<br>
+            <strong>Wind Speed:</strong> ${mockSolarData.weather.current.windSpeed} km/h
+          </div>
+        </div>
+        
+        <h2>Weather Forecast</h2>
+        <table>
+          <thead>
+            <tr><th>Day</th><th>Condition</th><th>High (°C)</th><th>Low (°C)</th></tr>
+          </thead>
+          <tbody>
+            ${mockSolarData.weather.forecast.map(forecast => 
+              `<tr><td>${forecast.day}</td><td>${forecast.condition}</td><td>${forecast.high}</td><td>${forecast.low}</td></tr>`
+            ).join('')}
+          </tbody>
+        </table>
+      </body>
+      </html>
+    `;
+
+    // Create blob and download
+    const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', `${filename}.html`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    // Note: For actual PDF generation, you would need a library like jsPDF or puppeteer
+    // This HTML file can be easily converted to PDF using browser's print function
   };
 
   return (
@@ -151,7 +329,7 @@ const Dashboard: React.FC = () => {
         {/* Bottom Section */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
-            <AlertsPanel alerts={mockSolarData.alerts} delay={0.7} />
+            <AlertsPanel alerts={mockSolarData.alerts as any} delay={0.7} />
           </div>
           
           <WeatherWidget weather={mockSolarData.weather} delay={0.8} />
