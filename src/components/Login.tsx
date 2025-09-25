@@ -1,73 +1,29 @@
 import React, { useState } from "react";
-import { useUser } from "../contexts/UserContext";
-import { FcGoogle } from "react-icons/fc";
 import { motion } from "framer-motion";
-import { Eye, EyeOff, Mail, Lock, User, ArrowRight, Shield, Phone, MapPin } from "lucide-react";
+import { User, Shield, ArrowRight } from "lucide-react";
 import LottieAnimation from "./LottieAnimation";
 import loginAnimation from "../assets/animations/login.json";
-import { FaGoogle } from "react-icons/fa";
+import UserLogin from "./UserLogin";
+import AdminLogin from "./AdminLogin";
 
 interface LoginProps {
   setActiveTab: (tab: string) => void;
 }
 
 const Login: React.FC<LoginProps> = ({ setActiveTab }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [location, setLocation] = useState("");
-  const [error, setError] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
-  const [activeAuthTab, setActiveAuthTab] = useState("login"); // login or signup
-  const { setUser } = useUser();
+  const [selectedRole, setSelectedRole] = useState<'user' | 'admin' | null>(null);
 
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError("");
+  // If a role is selected, render the appropriate login component
+  if (selectedRole === 'user') {
+    return <UserLogin setActiveTab={setActiveTab} onBackToRoleSelection={() => setSelectedRole(null)} />;
+  }
 
-    // Dummy validation
-    if (!email || !password || (activeAuthTab === "signup" && (!name || !phone || !location))) {
-      setError("Please fill in all required fields.");
-      setIsLoading(false);
-      return;
-    }
+  if (selectedRole === 'admin') {
+    return <AdminLogin setActiveTab={setActiveTab} onBackToRoleSelection={() => setSelectedRole(null)} />;
+  }
 
-    if (password.length < 6) {
-      setError("Password must be at least 6 characters long.");
-      setIsLoading(false);
-      return;
-    }
-
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
-      if (activeAuthTab === "signup") {
-        setUser({
-          name,
-          email,
-          phone,
-          location,
-          joined: new Date().toISOString(),
-        });
-      } else {
-        setUser({
-          name: "Solar User",
-          email,
-          phone: "+91 98765 43210",
-          location: "Coimbatore, Tamil Nadu",
-          joined: "2024-03-15",
-        });
-      }
-  setActiveTab('profile');
-    }, 1000);
-  };
-
-
+  // Role selection screen
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-100 via-orange-100 to-blue-200 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4 sm:p-6 lg:p-8 flex flex-col items-center justify-center relative overflow-hidden">
       
@@ -78,7 +34,7 @@ const Login: React.FC<LoginProps> = ({ setActiveTab }) => {
 
       {/* Main Content */}
       <motion.div 
-        className="w-full max-w-5xl z-10"
+        className="w-full max-w-4xl z-10"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -114,7 +70,7 @@ const Login: React.FC<LoginProps> = ({ setActiveTab }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
             >
-              Your intelligent solar energy management platform. Monitor, optimize, and maximize your renewable energy potential with advanced analytics and real-time insights.
+              Your intelligent solar energy management platform. Please select your role to continue.
             </motion.p>
             
             {/* Feature Highlights */}
@@ -143,7 +99,7 @@ const Login: React.FC<LoginProps> = ({ setActiveTab }) => {
             </motion.div>
           </div>
 
-          {/* Right Side - Login/Signup Form */}
+          {/* Right Side - Role Selection */}
           <motion.div 
             className="flex-1 w-full max-w-md"
             initial={{ opacity: 0, x: 50 }}
@@ -152,231 +108,74 @@ const Login: React.FC<LoginProps> = ({ setActiveTab }) => {
           >
             <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-3xl shadow-2xl p-8 border border-white/20 dark:border-gray-700/50">
               
-              {/* Tab Switcher */}
-              <div className="flex mb-8 bg-gray-100 dark:bg-gray-800 rounded-xl p-1">
-                <button
-                  onClick={() => setActiveAuthTab("login")}
-                  className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-all duration-300 ${
-                    activeAuthTab === "login" 
-                      ? "bg-white dark:bg-gray-700 text-orange-600 dark:text-yellow-100 shadow-md" 
-                      : "text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-yellow-300"
-                  }`}
-                >
-                  Login
-                </button>
-                <button
-                  onClick={() => setActiveAuthTab("signup")}
-                  className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-all duration-300 ${
-                    activeAuthTab === "signup" 
-                      ? "bg-white dark:bg-gray-700 text-orange-600 dark:text-yellow-100 shadow-md" 
-                      : "text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-yellow-300"
-                  }`}
-                >
-                  Sign Up
-                </button>
-              </div>
-
-              {/* Form Header */}
-              <div className="text-center mb-6">
+              {/* Header */}
+              <div className="text-center mb-8">
                 <h2 className="text-3xl font-bold text-orange-700 dark:text-yellow-100 mb-2">
-                  {activeAuthTab === "login" ? "Welcome Back!" : "Join SolarTrack"}
+                  Choose Your Role
                 </h2>
                 <p className="text-gray-600 dark:text-gray-300">
-                  {activeAuthTab === "login" 
-                    ? "Sign in to access your solar dashboard" 
-                    : "Create your account and start your solar journey"
-                  }
+                  Select how you want to access SolarTrack
                 </p>
               </div>
 
-              {/* Error Message */}
-              {error && (
-                <motion.div 
-                  className="mb-6 p-3 bg-red-100 dark:bg-red-900/30 border border-red-300 dark:border-red-600 text-red-700 dark:text-red-300 rounded-lg text-sm"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                >
-                  {error}
-                </motion.div>
-              )}
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                
-                {/* Name, Phone, Location Fields (only for signup) */}
-                {activeAuthTab === "signup" && (
-                  <>
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <label className="block text-gray-700 dark:text-gray-200 mb-2 font-medium">
-                        Full Name
-                      </label>
-                      <div className="relative">
-                        <User className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
-                        <input
-                          type="text"
-                          value={name}
-                          onChange={e => setName(e.target.value)}
-                          className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all"
-                          placeholder="Enter your full name"
-                          required
-                        />
-                      </div>
-                    </motion.div>
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <label className="block text-gray-700 dark:text-gray-200 mb-2 font-medium">
-                        Phone Number
-                      </label>
-                      <div className="relative">
-                        <Phone className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
-                        <input
-                          type="text"
-                          value={phone}
-                          onChange={e => setPhone(e.target.value)}
-                          className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all"
-                          placeholder="Enter your phone number"
-                          required
-                        />
-                      </div>
-                    </motion.div>
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <label className="block text-gray-700 dark:text-gray-200 mb-2 font-medium">
-                        Location
-                      </label>
-                      <div className="relative">
-                        <MapPin className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
-                        <input
-                          type="text"
-                          value={location}
-                          onChange={e => setLocation(e.target.value)}
-                          className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all"
-                          placeholder="Enter your location"
-                          required
-                        />
-                      </div>
-                    </motion.div>
-                  </>
-                )}
-
-                {/* Email Field */}
-                <div>
-                  <label className="block text-gray-700 dark:text-gray-200 mb-2 font-medium">
-                    Email Address
-                  </label>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={e => setEmail(e.target.value)}
-                      className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all"
-                      placeholder="Enter your email"
-                      required
-                    />
-                  </div>
-                </div>
-
-                {/* Password Field */}
-                <div>
-                  <label className="block text-gray-700 dark:text-gray-200 mb-2 font-medium">
-                    Password
-                  </label>
-                  <div className="relative">
-                    <Lock className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      value={password}
-                      onChange={e => setPassword(e.target.value)}
-                      className="w-full pl-11 pr-12 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all"
-                      placeholder="Enter your password"
-                      required
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-3 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
-                    >
-                      {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                    </button>
-                  </div>
-                </div>
-
-                {/* Remember Me & Forgot Password */}
-                {activeAuthTab === "login" && (
-                  <div className="flex items-center justify-between text-sm">
-                    <label className="flex items-center space-x-2 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={rememberMe}
-                        onChange={e => setRememberMe(e.target.checked)}
-                        className="w-4 h-4 accent-orange-500 rounded"
-                      />
-                      <span className="text-gray-600 dark:text-gray-300">Remember me</span>
-                    </label>
-                    <a href="#" className="text-orange-600 dark:text-yellow-400 hover:underline font-medium">
-                      Forgot password?
-                    </a>
-                  </div>
-                )}
-
-                {/* Submit Button */}
+              {/* Role Selection Cards */}
+              <div className="space-y-6">
+                {/* User Card */}
                 <motion.button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full py-4 bg-gradient-to-r from-orange-500 to-yellow-400 hover:from-orange-600 hover:to-yellow-500 text-white rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-[1.02] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                  onClick={() => setSelectedRole('user')}
+                  className="w-full p-6 bg-gradient-to-r from-orange-50 to-yellow-50 dark:from-orange-900/20 dark:to-yellow-900/20 border-2 border-orange-200 dark:border-orange-800 rounded-2xl hover:border-orange-400 dark:hover:border-orange-600 transition-all duration-300 text-left group"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  {isLoading ? (
-                    <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                  ) : (
-                    <>
-                      <span>{activeAuthTab === "login" ? "Sign In" : "Create Account"}</span>
-                      <ArrowRight className="w-5 h-5" />
-                    </>
-                  )}
+                  <div className="flex items-center space-x-4">
+                    <div className="flex-shrink-0 w-12 h-12 bg-orange-100 dark:bg-orange-900/50 rounded-full flex items-center justify-center group-hover:bg-orange-200 dark:group-hover:bg-orange-800 transition-colors">
+                      <User className="w-6 h-6 text-orange-600 dark:text-orange-400" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-semibold text-orange-700 dark:text-orange-300 mb-1">User Access</h3>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm">
+                        Monitor your solar panels, track energy production, and view analytics
+                      </p>
+                    </div>
+                    <ArrowRight className="w-5 h-5 text-orange-400 group-hover:text-orange-600 dark:group-hover:text-orange-300 transition-colors" />
+                  </div>
                 </motion.button>
 
-                {/* Divider */}
-                <div className="relative my-6">
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-300 dark:border-gray-600"></div>
+                {/* Admin Card */}
+                <motion.button
+                  onClick={() => setSelectedRole('admin')}
+                  className="w-full p-6 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border-2 border-blue-200 dark:border-blue-800 rounded-2xl hover:border-blue-400 dark:hover:border-blue-600 transition-all duration-300 text-left group"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <div className="flex items-center space-x-4">
+                    <div className="flex-shrink-0 w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-full flex items-center justify-center group-hover:bg-blue-200 dark:group-hover:bg-blue-800 transition-colors">
+                      <Shield className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-semibold text-blue-700 dark:text-blue-300 mb-1">Admin Access</h3>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm">
+                        Manage users, system settings, and oversee all operations
+                      </p>
+                    </div>
+                    <ArrowRight className="w-5 h-5 text-blue-400 group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors" />
                   </div>
-                  <div className="relative flex justify-center text-sm">
-                    <span className="px-4 bg-white dark:bg-gray-900 text-gray-500 dark:text-gray-400">
-                      or continue with
-                    </span>
-                  </div>
-                </div>
+                </motion.button>
+              </div>
 
-                {/* Social Login Buttons */}
-                <div className="flex justify-center">
-                  <FaGoogle className="w-5 h-5 text-red-500" />
-
-                </div>
-
-                {/* Security Notice */}
-                <div className="flex items-center justify-center space-x-2 text-sm text-gray-500 dark:text-gray-400 mt-6">
-                  <Shield className="w-4 h-4" />
-                  <span>Your data is secure and encrypted</span>
-                </div>
-              </form>
+              {/* Additional Info */}
+              <div className="mt-8 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
+                  Don't have an account? You can create one after selecting your role.
+                </p>
+              </div>
             </div>
           </motion.div>
         </div>
       </motion.div>
     </div>
   );
+
 };
 
 export default Login;

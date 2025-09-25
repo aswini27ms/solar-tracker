@@ -6,6 +6,7 @@ type User = {
   phone?: string;
   location?: string;
   joined?: string;
+  role?: 'user' | 'admin';
 };
 
 type UserContextType = {

@@ -26,15 +26,25 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
   const { isDark, toggleTheme } = useTheme();
   const { user, setUser } = useUser();
 
-  const navItems = user ? [
-    { id: 'home', label: 'Home', icon: Home },
-    { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
-    { id: 'analytics', label: 'Analytics', icon: TrendingUp },
-    { id: 'alerts', label: 'Alerts', icon: AlertTriangle },
-    { id: 'settings', label: 'Settings', icon: Settings },
-    { id: 'profile', label: 'Profile', icon: User },
-    { id: 'usermanual', label: 'User Manual', icon: BookOpen },
-  ] : [
+  const navItems = user ? (
+    user.role === 'admin' ? [
+      { id: 'admin-home', label: 'Home', icon: Home },
+      { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
+      { id: 'analytics', label: 'Analytics', icon: TrendingUp },
+      { id: 'alerts', label: 'Alerts', icon: AlertTriangle },
+      { id: 'settings', label: 'Settings', icon: Settings },
+      { id: 'profile', label: 'Profile', icon: User },
+      { id: 'usermanual', label: 'User Manual', icon: BookOpen },
+    ] : [
+      { id: 'home', label: 'Home', icon: Home },
+      { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
+      { id: 'analytics', label: 'Analytics', icon: TrendingUp },
+      { id: 'alerts', label: 'Alerts', icon: AlertTriangle },
+      { id: 'settings', label: 'Settings', icon: Settings },
+      { id: 'profile', label: 'Profile', icon: User },
+      { id: 'usermanual', label: 'User Manual', icon: BookOpen },
+    ]
+  ) : [
     { id: 'home', label: 'Home', icon: Home },
     { id: 'login', label: 'Login', icon: LogIn },
     { id: 'usermanual', label: 'User Manual', icon: BookOpen },
