@@ -2,40 +2,55 @@ import React from "react";
 import { motion } from "framer-motion";
 import { AlertTriangle, Info, CheckCircle, Clock } from "lucide-react";
 import AlertAnimation from "./AlertAnimation";
+import { useTranslation } from "react-i18next";
 
-const alerts = [
+type AlertType = "warning" | "info" | "success" | "error";
+
+type Severity = "high" | "medium" | "low";
+
+interface AlertItem {
+  id: number;
+  type: AlertType;
+  messageKey: string;
+  timestamp: string;
+  severity: Severity;
+}
+
+const alerts: AlertItem[] = [
   {
     id: 1,
     type: "warning",
-    message: "Battery level is below 20%. Please check your storage system.",
+    messageKey: "alerts-user.items.lowBattery",
     timestamp: "2025-09-21 10:15",
-    severity: "high",
+    severity: "high"
   },
   {
     id: 2,
     type: "info",
-    message: "Scheduled maintenance due in 3 days.",
+    messageKey: "alerts-user.items.maintenanceDue",
     timestamp: "2025-09-20 09:00",
-    severity: "medium",
+    severity: "medium"
   },
   {
     id: 3,
     type: "success",
-    message: "System running optimally. No issues detected.",
+    messageKey: "alerts-user.items.systemOptimal",
     timestamp: "2025-09-21 08:00",
-    severity: "low",
+    severity: "low"
   },
   {
     id: 4,
     type: "error",
-    message: "Inverter fault detected. Immediate attention required!",
+    messageKey: "alerts-user.items.inverterFault",
     timestamp: "2025-09-21 07:45",
-    severity: "high",
-  },
+    severity: "high"
+  }
 ];
 
 const Alerts: React.FC = () => {
-  const getAlertIcon = (type: string) => {
+  const { t } = useTranslation();
+
+  const getAlertIcon = (type: AlertType) => {
     switch (type) {
       case "warning":
         return <AlertTriangle className="w-5 h-5 text-yellow-500" />;
@@ -50,6 +65,15 @@ const Alerts: React.FC = () => {
     }
   };
 
+  const severityBadgeClasses = (sev: Severity) =>
+    `px-2 py-1 rounded-full text-xs font-medium ${
+      sev === "high"
+        ? "bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-400"
+        : sev === "medium"
+        ? "bg-yellow-100 dark:bg-yellow-900/40 text-yellow-700 dark:text-yellow-400"
+        : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
+    }`;
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-100 via-orange-100 to-blue-200 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4 sm:p-6 lg:p-8 flex flex-col items-center">
       <AlertAnimation className="w-32 h-32 mb-2" />
@@ -59,7 +83,9 @@ const Alerts: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-gray-700"
         >
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">System Alerts</h2>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+            {t("alerts-user.title")}
+          </h2>
           <div className="space-y-4">
             {alerts.map((alert) => (
               <div
@@ -75,23 +101,15 @@ const Alerts: React.FC = () => {
                 <div>{getAlertIcon(alert.type)}</div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-gray-900 dark:text-white mb-1">
-                    {alert.message}
+                    {t(alert.messageKey)}
                   </p>
                   <div className="flex items-center space-x-2 text-xs text-gray-500 dark:text-gray-400">
                     <Clock className="w-3 h-3" />
-                    <span>{alert.timestamp}</span>
+                    <span>{t("alerts-user.timestamp", { value: alert.timestamp })}</span>
                   </div>
                 </div>
-                <div
-                  className={`px-2 py-1 rounded-full text-xs font-medium ${
-                    alert.severity === "high"
-                      ? "bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-400"
-                      : alert.severity === "medium"
-                      ? "bg-yellow-100 dark:bg-yellow-900/40 text-yellow-700 dark:text-yellow-400"
-                      : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
-                  }`}
-                >
-                  {alert.severity}
+                <div className={severityBadgeClasses(alert.severity)}>
+                  {t(`alerts-user.severity.${alert.severity}`)}
                 </div>
               </div>
             ))}

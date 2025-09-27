@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useUser } from "../../contexts/UserContext";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { 
   Edit, 
   Mail, 
@@ -19,21 +20,23 @@ import {
   CheckCircle
 } from "lucide-react";
 
+
 const AdminProfile: React.FC = () => {
   const [editMode, setEditMode] = useState(false);
   const { user } = useUser();
+  const { t } = useTranslation();
   
   // Enhanced admin profile data
   const [profile, setProfile] = useState({
     phone: user?.phone || "+91 98765 43210",
-    location: user?.location || "Chennai, Tamil Nadu",
+    location: user?.location || "சென்னை, தமிழ்நாடு", // Changed to Tamil
     joined: user?.joined || "2024-01-15",
     avatar: "🛡️",
-    bio: "System Administrator with expertise in solar energy management and IoT systems. Responsible for maintaining system integrity and optimizing performance across all connected devices.",
-    adminLevel: "Super Administrator",
-    department: "System Operations",
+    bio: t('admin_profile.bio'),
+    adminLevel: t('admin_profile.admin_level'),
+    department: t('admin_profile.department'),
     employeeId: "ADM-2024-001",
-    accessLevel: "Level 5 - Full Access",
+    accessLevel: t('admin_profile.access_level'),
     lastLogin: "2024-09-25 22:45:30",
     sessionDuration: "2h 34m",
     systemsManaged: 24,
@@ -43,61 +46,94 @@ const AdminProfile: React.FC = () => {
     systemOptimizations: 47
   });
 
+
   // Update profile when user context changes
   useEffect(() => {
     if (user) {
       setProfile(prev => ({
         ...prev,
         phone: user.phone || prev.phone,
-        location: user.location || prev.location,
+        location: user.location || "சென்னை, தமிழ்நாடு", // Use Tamil as default
         joined: user.joined || prev.joined
       }));
     }
   }, [user]);
 
-  const adminAchievements = [
-    { id: 1, title: "System Guardian", description: "Maintained 99.9% uptime for 6 months", icon: "🛡️", date: "Jan 2024", impact: "High" },
-    { id: 2, title: "Crisis Manager", description: "Resolved 50+ critical incidents", icon: "🚨", date: "Mar 2024", impact: "Critical" },
-    { id: 3, title: "Efficiency Expert", description: "Optimized system performance by 35%", icon: "⚡", date: "May 2024", impact: "High" },
-    { id: 4, title: "Team Leader", description: "Trained 20+ new administrators", icon: "👥", date: "Jul 2024", impact: "Medium" },
-    { id: 5, title: "Security Champion", description: "Prevented 100+ security threats", icon: "🔒", date: "Aug 2024", impact: "Critical" },
-    { id: 6, title: "Innovation Driver", description: "Implemented 15+ system improvements", icon: "💡", date: "Sep 2024", impact: "High" }
-  ];
+  // Helper function to format date in Tamil context
+  const formatJoinedDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const months = {
+      0: 'ஜனவரி', 1: 'பிப்ரவரி', 2: 'மார்ச்', 3: 'ஏப்ரல்', 4: 'மே', 5: 'ஜூன்',
+      6: 'ஜூலை', 7: 'ஆகஸ்ட்', 8: 'செப்டம்பர்', 9: 'அக்டோபர்', 10: 'நவம்பர்', 11: 'டிசம்பர்'
+    };
+    return `${months[date.getMonth() as keyof typeof months]} ${date.getFullYear()}`;
+  };
+
+  const achievementsData = t('admin_profile.achievements', { returnObjects: true }) as any[];
+  const adminAchievements = achievementsData.map((achievement: any, index: number) => ({
+    id: index + 1,
+    title: achievement.title,
+    description: achievement.description,
+    icon: ["🛡️", "🚨", "⚡", "👥", "🔒", "💡"][index],
+    date: [
+      "ஜனவரி 2024", "மார்ச் 2024", "மே 2024", 
+      "ஜூலை 2024", "ஆகஸ்ட் 2024", "செப்டம்பர் 2024"
+    ][index], // Changed to Tamil months
+    impact: achievement.impact === "மிகவும் முக்கியம்" ? "Critical" : achievement.impact === "அதிகம்" ? "High" : "Medium"
+  }));
+
 
   const adminStats = [
-    { label: "Systems Managed", value: profile.systemsManaged, icon: <Server className="w-5 h-5" />, color: "text-blue-600", change: "+2 this month" },
-    { label: "Users Managed", value: profile.usersManaged, icon: <Users className="w-5 h-5" />, color: "text-green-600", change: "+12 this week" },
-    { label: "System Uptime", value: profile.totalUptime, icon: <Activity className="w-5 h-5" />, color: "text-purple-600", change: "Stable" },
-    { label: "Incidents Resolved", value: profile.incidentsResolved, icon: <AlertTriangle className="w-5 h-5" />, color: "text-red-600", change: "+5 today" }
+    { label: t('admin_profile.stats.systems_managed'), value: profile.systemsManaged, icon: <Server className="w-5 h-5" />, color: "text-blue-600", change: "+2 this month" },
+    { label: t('admin_profile.stats.users_managed'), value: profile.usersManaged, icon: <Users className="w-5 h-5" />, color: "text-green-600", change: "+12 this week" },
+    { label: t('admin_profile.stats.system_uptime'), value: profile.totalUptime, icon: <Activity className="w-5 h-5" />, color: "text-purple-600", change: "Stable" },
+    { label: t('admin_profile.stats.incidents_resolved'), value: profile.incidentsResolved, icon: <AlertTriangle className="w-5 h-5" />, color: "text-red-600", change: "+5 today" }
   ];
+
 
   const systemMetrics = [
-    { label: "CPU Usage", value: "45%", trend: "down", icon: <Database className="w-4 h-4" /> },
-    { label: "Memory Usage", value: "67%", trend: "up", icon: <Database className="w-4 h-4" /> },
-    { label: "Network Load", value: "23%", trend: "stable", icon: <Activity className="w-4 h-4" /> },
-    { label: "Storage Usage", value: "78%", trend: "up", icon: <Server className="w-4 h-4" /> }
+    { label: t('admin_profile.metrics.cpu_usage'), value: "45%", trend: "down", icon: <Database className="w-4 h-4" /> },
+    { label: t('admin_profile.metrics.memory_usage'), value: "67%", trend: "up", icon: <Database className="w-4 h-4" /> },
+    { label: t('admin_profile.metrics.network_load'), value: "23%", trend: "stable", icon: <Activity className="w-4 h-4" /> },
+    { label: t('admin_profile.metrics.storage_usage'), value: "78%", trend: "up", icon: <Server className="w-4 h-4" /> }
   ];
+
 
   const adminActivities = [
-    { id: 1, activity: "System backup completed", status: "success", time: "10 minutes ago", system: "Main Server" },
-    { id: 2, activity: "User access modified", status: "warning", time: "1 hour ago", user: "John Doe" },
-    { id: 3, activity: "Security patch applied", status: "success", time: "2 hours ago", system: "Security Module" },
-    { id: 4, activity: "Performance optimization", status: "success", time: "3 hours ago", impact: "15% improvement" },
-    { id: 5, activity: "Failed login attempt", status: "error", time: "4 hours ago", user: "Unknown IP" },
-    { id: 6, activity: "System maintenance scheduled", status: "info", time: "5 hours ago", scheduled: "Tomorrow 2:00 AM" }
+    { id: 1, activity: t('admin_profile.activities.system_backup'), status: "success", time: "10 minutes ago", system: "Main Server" },
+    { id: 2, activity: t('admin_profile.activities.user_access_modified'), status: "warning", time: "1 hour ago", user: "John Doe" },
+    { id: 3, activity: t('admin_profile.activities.security_patch_applied'), status: "success", time: "2 hours ago", system: "Security Module" },
+    { id: 4, activity: t('admin_profile.activities.performance_optimization'), status: "success", time: "3 hours ago", impact: "15% improvement" },
+    { id: 5, activity: t('admin_profile.activities.failed_login_attempt'), status: "error", time: "4 hours ago", user: "Unknown IP" },
+    { id: 6, activity: t('admin_profile.activities.system_maintenance_scheduled'), status: "info", time: "5 hours ago", scheduled: "Tomorrow 2:00 AM" }
   ];
 
+
   const permissions = [
-    { category: "System Administration", items: ["Full system access", "User management", "System configuration", "Backup management"] },
-    { category: "Security", items: ["Security policy management", "Access control", "Threat monitoring", "Incident response"] },
-    { category: "Monitoring", items: ["Real-time monitoring", "Performance analytics", "Alert management", "Report generation"] },
-    { category: "Data Management", items: ["Database administration", "Data backup", "Data recovery", "Audit logs"] }
+    { 
+      category: t('admin_profile.permissions.system_administration'), 
+      items: t('admin_profile.permissions.items.system_administration', { returnObjects: true }) as string[] 
+    },
+    { 
+      category: t('admin_profile.permissions.security'), 
+      items: t('admin_profile.permissions.items.security', { returnObjects: true }) as string[] 
+    },
+    { 
+      category: t('admin_profile.permissions.monitoring'), 
+      items: t('admin_profile.permissions.items.monitoring', { returnObjects: true }) as string[] 
+    },
+    { 
+      category: t('admin_profile.permissions.data_management'), 
+      items: t('admin_profile.permissions.items.data_management', { returnObjects: true }) as string[] 
+    }
   ];
+
 
   const handleSave = () => {
     setEditMode(false);
     // Here you would typically save to backend
   };
+
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -109,6 +145,7 @@ const AdminProfile: React.FC = () => {
     }
   };
 
+
   const getTrendIcon = (trend: string) => {
     switch (trend) {
       case 'up': return '📈';
@@ -117,6 +154,7 @@ const AdminProfile: React.FC = () => {
       default: return '➡️';
     }
   };
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-100 via-orange-100 to-blue-200 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4 sm:p-6 lg:p-8">
@@ -151,6 +189,7 @@ const AdminProfile: React.FC = () => {
               </div>
             </div>
 
+
             {/* Admin Info */}
             <div className="flex-1 text-center lg:text-left">
               {editMode ? (
@@ -162,7 +201,7 @@ const AdminProfile: React.FC = () => {
                     className="text-3xl font-bold bg-transparent border-b-2 border-blue-500 text-blue-700 dark:text-yellow-100 focus:outline-none cursor-not-allowed"
                   />
                   <textarea
-                    value={profile.bio}
+                    value={t('admin_profile.bio')}
                     readOnly
                     className="w-full p-3 bg-gray-100 dark:bg-gray-800 rounded-lg resize-none cursor-not-allowed"
                     rows={3}
@@ -171,14 +210,15 @@ const AdminProfile: React.FC = () => {
               ) : (
                 <>
                   <div className="flex items-center justify-center lg:justify-start gap-3 mb-2">
-                    <h1 className="text-3xl font-bold text-blue-700 dark:text-yellow-100">{user?.name || "System Administrator"}</h1>
+                    <h1 className="text-3xl font-bold text-blue-700 dark:text-yellow-100">{user?.name || t('admin_profile.title')}</h1>
                     <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium">
-                      {profile.adminLevel}
+                      {t('admin_profile.admin_level')}
                     </span>
                   </div>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">{profile.bio}</p>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">{t('admin_profile.bio')}</p>
                 </>
               )}
+
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-sm">
                 <div className="flex items-center justify-center lg:justify-start space-x-2 text-gray-600 dark:text-gray-300">
@@ -195,17 +235,18 @@ const AdminProfile: React.FC = () => {
                 </div>
                 <div className="flex items-center justify-center lg:justify-start space-x-2 text-gray-600 dark:text-gray-300">
                   <Calendar className="w-4 h-4" />
-                  <span>Joined {user?.joined ? new Date(user.joined).toLocaleDateString('en-IN', { month: 'long', year: 'numeric' }) : new Date(profile.joined).toLocaleDateString('en-IN', { month: 'long', year: 'numeric' })}</span>
+                  <span>சேர்ந்தது {formatJoinedDate(user?.joined || profile.joined)}</span> {/* Changed to Tamil */}
                 </div>
                 <div className="flex items-center justify-center lg:justify-start space-x-2 text-gray-600 dark:text-gray-300">
                   <Key className="w-4 h-4" />
-                  <span>{profile.accessLevel}</span>
+                  <span>{t('admin_profile.access_level')}</span>
                 </div>
                 <div className="flex items-center justify-center lg:justify-start space-x-2 text-gray-600 dark:text-gray-300">
                   <Activity className="w-4 h-4" />
-                  <span>Last login: {profile.lastLogin}</span>
+                  <span>{t('admin_profile.last_login')}: {profile.lastLogin}</span>
                 </div>
               </div>
+
 
               {editMode && (
                 <div className="flex gap-3 mt-6">
@@ -213,19 +254,20 @@ const AdminProfile: React.FC = () => {
                     onClick={handleSave}
                     className="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold transition-colors"
                   >
-                    Save Changes
+                    {t('admin_profile.save_changes')}
                   </button>
                   <button
                     onClick={() => setEditMode(false)}
                     className="px-6 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-semibold transition-colors"
                   >
-                    Cancel
+                    {t('admin_profile.cancel')}
                   </button>
                 </div>
               )}
             </div>
           </div>
         </motion.div>
+
 
         {/* Admin Stats Grid */}
         <motion.div 
@@ -250,6 +292,7 @@ const AdminProfile: React.FC = () => {
           ))}
         </motion.div>
 
+
         {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
@@ -262,7 +305,7 @@ const AdminProfile: React.FC = () => {
           >
             <h3 className="text-2xl font-bold text-blue-700 dark:text-yellow-100 mb-6 flex items-center">
               <Award className="w-6 h-6 mr-3" />
-              Administrative Achievements
+              நிர்வாக சாதனைகள் {/* Changed to Tamil */}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {adminAchievements.map((achievement) => (
@@ -293,6 +336,7 @@ const AdminProfile: React.FC = () => {
             </div>
           </motion.div>
 
+
           {/* System Metrics */}
           <motion.div 
             className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-3xl shadow-xl p-8 border border-white/20 dark:border-gray-700/50"
@@ -302,7 +346,7 @@ const AdminProfile: React.FC = () => {
           >
             <h3 className="text-2xl font-bold text-purple-700 dark:text-yellow-100 mb-6 flex items-center">
               <BarChart3 className="w-6 h-6 mr-3" />
-              System Metrics
+              {t('admin_profile.system_metrics')} {/* Using translation */}
             </h3>
             <div className="space-y-4">
               {systemMetrics.map((metric, index) => (
@@ -332,6 +376,7 @@ const AdminProfile: React.FC = () => {
           </motion.div>
         </div>
 
+
         {/* Second Row - Admin Activities and Permissions */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
           
@@ -344,7 +389,7 @@ const AdminProfile: React.FC = () => {
           >
             <h3 className="text-2xl font-bold text-green-700 dark:text-yellow-100 mb-6 flex items-center">
               <Activity className="w-6 h-6 mr-3" />
-              Recent Administrative Activities
+              {t('admin_profile.recent_activities')} {/* Using translation */}
             </h3>
             <div className="space-y-4">
               {adminActivities.map((activity) => (
@@ -371,6 +416,7 @@ const AdminProfile: React.FC = () => {
             </div>
           </motion.div>
 
+
           {/* Admin Permissions */}
           <motion.div 
             className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-3xl shadow-xl p-8 border border-white/20 dark:border-gray-700/50"
@@ -380,7 +426,7 @@ const AdminProfile: React.FC = () => {
           >
             <h3 className="text-2xl font-bold text-indigo-700 dark:text-yellow-100 mb-6 flex items-center">
               <Shield className="w-6 h-6 mr-3" />
-              Access Permissions
+              {t('admin_profile.access_permissions')} {/* Using translation */}
             </h3>
             <div className="space-y-4">
               {permissions.map((permission, index) => (
@@ -403,5 +449,6 @@ const AdminProfile: React.FC = () => {
     </div>
   );
 };
+
 
 export default AdminProfile;

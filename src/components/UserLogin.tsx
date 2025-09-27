@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useUser } from "../contexts/UserContext";
 import { motion } from "framer-motion";
 import { Eye, EyeOff, Mail, Lock, User, ArrowRight, Phone, MapPin } from "lucide-react";
@@ -21,6 +22,7 @@ const UserLogin: React.FC<UserLoginProps> = ({ setActiveTab, onBackToRoleSelecti
   const [isLoading, setIsLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [activeAuthTab, setActiveAuthTab] = useState("login"); // login or signup
+  const { t } = useTranslation();
   const { setUser } = useUser();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -30,13 +32,13 @@ const UserLogin: React.FC<UserLoginProps> = ({ setActiveTab, onBackToRoleSelecti
 
     // Validation
     if (!email || !password || (activeAuthTab === "signup" && (!name || !phone || !location))) {
-      setError("Please fill in all required fields.");
+  setError(t("please_fill_required", "Please fill in all required fields."));
       setIsLoading(false);
       return;
     }
 
     if (password.length < 6) {
-      setError("Password must be at least 6 characters long.");
+      setError(t("password_min_length", "Password must be at least 6 characters long."));
       setIsLoading(false);
       return;
     }
@@ -106,7 +108,7 @@ const UserLogin: React.FC<UserLoginProps> = ({ setActiveTab, onBackToRoleSelecti
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
             >
-              Welcome to SolarTrack
+              {t("solartrack_welcome", "Welcome to SolarTrack")}
             </motion.h1>
             <motion.p 
               className="text-lg text-blue-800 dark:text-blue-200 mb-6 leading-relaxed"
@@ -114,7 +116,7 @@ const UserLogin: React.FC<UserLoginProps> = ({ setActiveTab, onBackToRoleSelecti
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
             >
-              Your intelligent solar energy management platform. Monitor, optimize, and maximize your renewable energy potential with advanced analytics and real-time insights.
+              {t("solartrack_desc", "Your intelligent solar energy management platform. Monitor, optimize, and maximize your renewable energy potential with advanced analytics and real-time insights.")}
             </motion.p>
             
             {/* Feature Highlights */}
@@ -126,19 +128,19 @@ const UserLogin: React.FC<UserLoginProps> = ({ setActiveTab, onBackToRoleSelecti
             >
               <div className="flex items-center space-x-3 p-3 bg-white/50 dark:bg-gray-800/50 rounded-lg backdrop-blur-sm">
                 <span className="text-2xl">📊</span>
-                <span className="text-gray-700 dark:text-gray-200 font-medium">Real-time Analytics</span>
+                <span className="text-gray-700 dark:text-gray-200 font-medium">{t("real_time_analytics", "Real-time Analytics")}</span>
               </div>
               <div className="flex items-center space-x-3 p-3 bg-white/50 dark:bg-gray-800/50 rounded-lg backdrop-blur-sm">
                 <span className="text-2xl">🔋</span>
-                <span className="text-gray-700 dark:text-gray-200 font-medium">Energy Optimization</span>
+                <span className="text-gray-700 dark:text-gray-200 font-medium">{t("energy_optimization", "Energy Optimization")}</span>
               </div>
               <div className="flex items-center space-x-3 p-3 bg-white/50 dark:bg-gray-800/50 rounded-lg backdrop-blur-sm">
                 <span className="text-2xl">💰</span>
-                <span className="text-gray-700 dark:text-gray-200 font-medium">Cost Savings</span>
+                <span className="text-gray-700 dark:text-gray-200 font-medium">{t("cost_savings", "Cost Savings")}</span>
               </div>
               <div className="flex items-center space-x-3 p-3 bg-white/50 dark:bg-gray-800/50 rounded-lg backdrop-blur-sm">
                 <span className="text-2xl">🌱</span>
-                <span className="text-gray-700 dark:text-gray-200 font-medium">Eco-Friendly</span>
+                <span className="text-gray-700 dark:text-gray-200 font-medium">{t("eco_friendly", "Eco-Friendly")}</span>
               </div>
             </motion.div>
           </div>
@@ -162,7 +164,7 @@ const UserLogin: React.FC<UserLoginProps> = ({ setActiveTab, onBackToRoleSelecti
                       : "text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-yellow-300"
                   }`}
                 >
-                  Login
+                  {t("login", "Login")}
                 </button>
                 <button
                   onClick={() => setActiveAuthTab("signup")}
@@ -172,19 +174,19 @@ const UserLogin: React.FC<UserLoginProps> = ({ setActiveTab, onBackToRoleSelecti
                       : "text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-yellow-300"
                   }`}
                 >
-                  Sign Up
+                  {t("signup", "Sign Up")}
                 </button>
               </div>
 
               {/* Form Header */}
               <div className="text-center mb-6">
                 <h2 className="text-3xl font-bold text-orange-700 dark:text-yellow-100 mb-2">
-                  {activeAuthTab === "login" ? "User Login" : "User Registration"}
+                  {activeAuthTab === "login" ? t("user_login", "User Login") : t("user_registration", "User Registration")}
                 </h2>
                 <p className="text-gray-600 dark:text-gray-300">
                   {activeAuthTab === "login" 
-                    ? "Sign in to access your solar dashboard" 
-                    : "Create your account and start your solar journey"
+                    ? t("sign_in_dashboard", "Sign in to access your solar dashboard")
+                    : t("create_account_journey", "Create your account and start your solar journey")
                   }
                 </p>
               </div>
@@ -211,7 +213,7 @@ const UserLogin: React.FC<UserLoginProps> = ({ setActiveTab, onBackToRoleSelecti
                       transition={{ duration: 0.3 }}
                     >
                       <label className="block text-gray-700 dark:text-gray-200 mb-2 font-medium">
-                        Full Name
+                        {t("full_name", "Full Name")}
                       </label>
                       <div className="relative">
                         <User className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
@@ -220,7 +222,7 @@ const UserLogin: React.FC<UserLoginProps> = ({ setActiveTab, onBackToRoleSelecti
                           value={name}
                           onChange={e => setName(e.target.value)}
                           className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all"
-                          placeholder="Enter your full name"
+                          placeholder={t("full_name_placeholder", "Enter your full name")}
                           required
                         />
                       </div>
@@ -231,7 +233,7 @@ const UserLogin: React.FC<UserLoginProps> = ({ setActiveTab, onBackToRoleSelecti
                       transition={{ duration: 0.3 }}
                     >
                       <label className="block text-gray-700 dark:text-gray-200 mb-2 font-medium">
-                        Phone Number
+                        {t("phone_number", "Phone Number")}
                       </label>
                       <div className="relative">
                         <Phone className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
@@ -240,7 +242,7 @@ const UserLogin: React.FC<UserLoginProps> = ({ setActiveTab, onBackToRoleSelecti
                           value={phone}
                           onChange={e => setPhone(e.target.value)}
                           className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all"
-                          placeholder="Enter your phone number"
+                          placeholder={t("phone_number_placeholder", "Enter your phone number")}
                           required
                         />
                       </div>
@@ -251,7 +253,7 @@ const UserLogin: React.FC<UserLoginProps> = ({ setActiveTab, onBackToRoleSelecti
                       transition={{ duration: 0.3 }}
                     >
                       <label className="block text-gray-700 dark:text-gray-200 mb-2 font-medium">
-                        Location
+                        {t("location", "Location")}
                       </label>
                       <div className="relative">
                         <MapPin className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
@@ -260,7 +262,7 @@ const UserLogin: React.FC<UserLoginProps> = ({ setActiveTab, onBackToRoleSelecti
                           value={location}
                           onChange={e => setLocation(e.target.value)}
                           className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all"
-                          placeholder="Enter your location"
+                          placeholder={t("location_placeholder", "Enter your location")}
                           required
                         />
                       </div>
@@ -271,7 +273,7 @@ const UserLogin: React.FC<UserLoginProps> = ({ setActiveTab, onBackToRoleSelecti
                 {/* Email Field */}
                 <div>
                   <label className="block text-gray-700 dark:text-gray-200 mb-2 font-medium">
-                    Email Address
+                    {t("email_address", "Email Address")}
                   </label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
@@ -280,7 +282,7 @@ const UserLogin: React.FC<UserLoginProps> = ({ setActiveTab, onBackToRoleSelecti
                       value={email}
                       onChange={e => setEmail(e.target.value)}
                       className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all"
-                      placeholder="Enter your email"
+                      placeholder={t("email_placeholder", "Enter your email")}
                       required
                     />
                   </div>
@@ -289,7 +291,7 @@ const UserLogin: React.FC<UserLoginProps> = ({ setActiveTab, onBackToRoleSelecti
                 {/* Password Field */}
                 <div>
                   <label className="block text-gray-700 dark:text-gray-200 mb-2 font-medium">
-                    Password
+                    {t("password", "Password")}
                   </label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
@@ -298,7 +300,7 @@ const UserLogin: React.FC<UserLoginProps> = ({ setActiveTab, onBackToRoleSelecti
                       value={password}
                       onChange={e => setPassword(e.target.value)}
                       className="w-full pl-11 pr-12 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all"
-                      placeholder="Enter your password"
+                      placeholder={t("password_placeholder", "Enter your password")}
                       required
                     />
                     <button
@@ -321,10 +323,10 @@ const UserLogin: React.FC<UserLoginProps> = ({ setActiveTab, onBackToRoleSelecti
                         onChange={e => setRememberMe(e.target.checked)}
                         className="w-4 h-4 accent-orange-500 rounded"
                       />
-                      <span className="text-gray-600 dark:text-gray-300">Remember me</span>
+                      <span className="text-gray-600 dark:text-gray-300">{t("remember_me", "Remember me")}</span>
                     </label>
                     <a href="#" className="text-orange-600 dark:text-yellow-400 hover:underline font-medium">
-                      Forgot password?
+                      {t("forgot_password", "Forgot password?")}
                     </a>
                   </div>
                 )}
@@ -341,7 +343,7 @@ const UserLogin: React.FC<UserLoginProps> = ({ setActiveTab, onBackToRoleSelecti
                     <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                   ) : (
                     <>
-                      <span>{activeAuthTab === "login" ? "Sign In" : "Create Account"}</span>
+                      <span>{activeAuthTab === "login" ? t("sign_in", "Sign In") : t("create_account", "Create Account")}</span>
                       <ArrowRight className="w-5 h-5" />
                     </>
                   )}
@@ -354,7 +356,7 @@ const UserLogin: React.FC<UserLoginProps> = ({ setActiveTab, onBackToRoleSelecti
                   onClick={onBackToRoleSelection}
                   className="text-orange-600 dark:text-yellow-400 hover:underline font-medium"
                 >
-                  ← Back to role selection
+                  ← {t("back_to_role_selection", "Back to role selection")}
                 </button>
               </div>
             </div>

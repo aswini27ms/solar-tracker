@@ -1,0 +1,574 @@
+{
+  "admin_welcome_title": "Welcome to SolarTrack",
+  "admin_welcome_desc": "Your intelligent solar energy management platform. Monitor, optimize, and maximize your renewable energy potential with advanced analytics and real-time insights.",
+  "admin_feature_realtime_analytics": "Real-time Analytics",
+  "admin_feature_energy_optimization": "Energy Optimization",
+  "admin_feature_cost_savings": "Cost Savings",
+  "admin_feature_eco_friendly": "Eco-Friendly",
+  "admin_login_tab": "Admin Login",
+  "admin_signup_tab": "Register Admin",
+  "admin_login_header": "Admin Login",
+  "admin_signup_header": "Admin Registration",
+  "admin_login_desc": "Sign in to access your admin dashboard",
+  "admin_signup_desc": "Create your admin account and start managing",
+  "admin_name_label": "Admin Name",
+  "admin_name_placeholder": "Enter administrator name",
+  "admin_phone_label": "Admin Phone",
+  "admin_phone_placeholder": "Enter administrator phone",
+  "admin_email_label": "Admin Email",
+  "admin_email_placeholder": "Enter admin email",
+  "admin_password_label": "Admin Password",
+  "admin_password_placeholder": "Enter admin password",
+  "admin_password_hint": "Password must be at least 8 characters long",
+  "admin_remember_me": "Remember me on this device",
+  "admin_login_btn": "Access Admin Panel",
+  "admin_signup_btn": "Create Admin Account",
+  "admin_back_to_role": "← Back to role selection",
+  "welcome": "Welcome",
+  "login": "Login",
+  "logout": "Logout",
+  "dashboard": "Dashboard",
+  "settings": "Settings",
+  "profile": "Profile",
+  "home": "Home",
+  "analytics-nav": "Analytics",
+  "alerts": "Alerts",
+  "usermanual": "User Manual",
+  "user_manual_guide": "User Manual Guide",
+  "user_manual_guide_desc": "Complete guide to using the Smart Microgrid Management System",
+  "introduction": "Introduction",
+  "system_overview": "System Overview",
+  "installation_setup": "Installation & Setup",
+  "user_roles_access": "User Roles & Access",
+  "using_dashboard": "Using the Dashboard",
+  "alerts_notifications": "Alerts & Notifications",
+  "troubleshooting_guide": "Troubleshooting Guide",
+  "safety_instructions": "Safety Instructions",
+  "maintenance_guidelines": "Maintenance Guidelines",
+  "faqs": "FAQs",
+  "contact_support": "Contact Support",
+  "manual_intro": "Welcome to the Smart Microgrid Management System.<br />This platform enables users to monitor, control, and optimize energy generation, storage, and consumption within a microgrid.<br />The system supports multiple energy sources (solar, battery, and grid), provides real-time monitoring, alerts, and data-driven insights for efficient operation.<ul><li><b>Purpose:</b> Ensure uninterrupted power supply, optimize energy usage and cost savings, provide users with actionable insights and alerts.</li><li><b>Target Users:</b> Admin (manages system/users), Operators (monitor/handle operations), Consumers (view usage/receive alerts).</li></ul>",
+  "manual_system_overview": "<b>Components:</b><ul><li>Energy Sources: Solar panels, grid supply</li><li>Energy Storage: Battery bank</li><li>Load Management: Appliances</li><li>Controller: Microgrid Control Unit with IoT sensors</li><li>User Interface: Web & Mobile Dashboard</li></ul><b class='block mt-2'>Features:</b><ul><li>Real-time monitoring of energy flow</li><li>Automatic switching between grid and battery</li><li>Smart alerts for faults, overload, or maintenance</li><li>Data analytics for performance and savings</li></ul>",
+  "manual_installation_setup": "<b>Hardware Setup:</b><ul><li>Install solar panels and connect to charge controller</li><li>Connect battery bank to controller</li><li>Connect loads through control unit</li><li>Ensure proper grounding and safety checks</li></ul><b class='block mt-2'>Software Setup:</b><ul><li>Power ON the control unit</li><li>Connect to Wi-Fi/LoRa</li><li>Access the web app: <a href='https://www.microgrid-system.com'>www.microgrid-system.com</a></li><li>Log in with your username and password provided by the admin</li></ul>",
+  "manual_user_roles_access": "<ul><li><b>Admin:</b> Add/remove users, configure thresholds, access all data/reports/logs</li><li><b>Operator:</b> Monitor energy flow, acknowledge/resolve alerts</li><li><b>Consumer/User:</b> View real-time usage, check bills/savings/alerts</li></ul>",
+  "manual_using_dashboard": "<b>Homepage:</b> Energy Flow Diagram → Generation → Storage → Consumption.<br/><b>Key Metrics:</b> Solar generation, battery status, grid usage, load demand.<br/><b>Settings Page:</b> Configure battery limits, set load priority, change alert preferences.<br/><b>Alerts Page:</b> View live notifications (Low Battery, Overload, Fault, Grid outage), acknowledge/resolve alerts.<br/><b>Reports & Analytics:</b> Daily/monthly usage, cost savings, efficiency, carbon footprint reduction.",
+  "manual_alerts_notifications": "<table class='w-full text-sm mb-2 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden'><thead class='bg-gray-100 dark:bg-gray-800'><tr><th class='p-2'>Alert</th><th class='p-2'>Meaning</th><th class='p-2'>Action Required</th></tr></thead><tbody><tr class='border-t'><td class='p-2'>⚠ Low Battery</td><td class='p-2'>Battery level &lt; 20%</td><td class='p-2'>Switch to grid or reduce load</td></tr><tr class='border-t'><td class='p-2'>⚡ Overload</td><td class='p-2'>Load exceeds limit</td><td class='p-2'>Disconnect non-critical loads</td></tr><tr class='border-t'><td class='p-2'>🔌 Grid Disconnection</td><td class='p-2'>No grid supply</td><td class='p-2'>System running on battery</td></tr><tr class='border-t'><td class='p-2'>🛠 Maintenance Due</td><td class='p-2'>Scheduled servicing</td><td class='p-2'>Contact technician</td></tr></tbody></table>",
+  "manual_troubleshooting_guide": "<ul><li>Dashboard not showing data → Check internet/Wi-Fi</li><li>False alert triggered → Recalibrate sensors</li><li>Battery not charging → Inspect solar panel/charge controller</li><li>Emergency → Press 'System Shutdown' button or use hardware kill switch</li></ul>",
+  "manual_safety_instructions": "<ul><li>Do not touch exposed wires while system is active</li><li>Ensure proper earthing before operation</li><li>Only authorized personnel should perform repairs</li><li>Disconnect main supply before maintenance</li></ul>",
+  "manual_maintenance_guidelines": "<ul><li>Clean solar panels once a month</li><li>Check battery health monthly</li><li>Inspect wiring/connections quarterly</li><li>Back up data logs regularly</li></ul>",
+  "manual_faqs": "<ul><li><b>Q1:</b> Can the system work without internet? <br/>Yes, local monitoring works offline. Data syncs when internet is restored.</li><li><b>Q2:</b> Can I add more solar panels later? <br/>Yes, system is scalable. Update configuration in the Settings page.</li><li><b>Q3:</b> How do I reset the system? <br/>Press the reset button on the controller or use 'Factory Reset' in the web app.</li></ul>",
+  "manual_contact_support": "<div class='flex flex-col space-y-1'><span><b>📞 Helpline:</b> +91-XXXXXXXXXX</span><span><b>📧 Email:</b> <a href='mailto:support@microgrid.com' class='text-blue-600 underline'>support@microgrid.com</a></span><span><b>🌐 Website:</b> <a href='https://solar-tracker-zeta.vercel.app/' class='text-blue-600 underline'>www.microgrid-system.com</a></span></div>",
+  "home_hero_title": "Welcome to SolarTrack",
+  "home_hero_desc": "Your all-in-one platform to monitor, analyze, and optimize your solar energy system. Harness the power of the sun with real-time insights and smart analytics.",
+  "home_dashboard_btn": "Go to Dashboard",
+  "home_get_started_btn": "Get Started",
+  "home_maximize_title": "Maximize Your Solar Potential",
+  "home_maximize_desc": "Experience cutting-edge solar monitoring technology that adapts to your needs. Our intelligent system learns from your usage patterns and provides personalized recommendations to optimize your energy efficiency.",
+  "home_feature_energy_storage": "Energy Storage",
+  "home_feature_eco_friendly": "Eco-Friendly",
+  "home_feature_cost_savings": "Cost Savings",
+  "home_feature_mobile_ready": "Mobile Ready",
+  "home_card_live_monitoring_title": "Live Monitoring",
+  "home_card_live_monitoring_desc": "Track your solar panel output and system status in real time, anytime, anywhere.",
+  "home_card_advanced_analytics_title": "Advanced Analytics",
+  "home_card_advanced_analytics_desc": "Visualize energy production, consumption, and savings with interactive charts and reports.",
+  "home_card_smart_alerts_title": "Smart Alerts",
+  "home_card_smart_alerts_desc": "Get instant notifications for system issues, maintenance reminders, and performance tips.",
+  "login_welcome_title": "Welcome to SolarTrack",
+  "login_welcome_desc": "Your intelligent solar energy management platform. Please select your role to continue.",
+  "login_feature_realtime_analytics": "Real-time Analytics",
+  "login_feature_energy_optimization": "Energy Optimization",
+  "login_feature_cost_savings": "Cost Savings",
+  "login_feature_eco_friendly": "Eco-Friendly",
+  "login_choose_role_title": "Choose Your Role",
+  "login_choose_role_desc": "Select how you want to access SolarTrack",
+  "login_user_access_title": "User Access",
+  "login_user_access_desc": "Monitor your solar panels, track energy production, and view analytics",
+  "login_admin_access_title": "Admin Access",
+  "login_admin_access_desc": "Manage users, system settings, and oversee all operations",
+  "login_no_account": "Don't have an account? You can create one after selecting your role.",
+  "admin_alerts_title": "System Alerts",
+  "admin_alerts_subtitle": "Real-time monitoring of system warnings and critical issues",
+  "admin_alerts_critical": "Critical",
+  "admin_alerts_warning": "Warning",
+  "admin_alerts_info": "Info",
+  "admin_alerts_all": "All Alerts",
+  "admin_alerts_none": "No alerts at the moment",
+  "admin_alerts_all_normal": "All systems are operating normally",
+  "admin_alerts_ack_all": "Acknowledge All",
+  "alert_severity_warning": "Warning",
+  "alert_severity_critical": "Critical",
+  "analytics_dashboard": "Analytics Dashboard",
+  "analytics_description": "Detailed battery and solar system analytics",
+  "alert_severity_info": "Info",
+  "alert_category_Grid": "Grid",
+  "alert_category_Battery": "Battery",
+  "alert_category_Solar": "Solar",
+  "alert_category_System": "System",
+  "alert_message_Component requires attention": "Component requires attention",
+  "alert_message_Battery temperature exceeding safe threshold": "Battery temperature exceeding safe threshold",
+  "alert_message_Solar panel efficiency below optimal range": "Solar panel efficiency below optimal range",
+  "alert_message_System maintenance scheduled for tomorrow": "System maintenance scheduled for tomorrow",
+  "buttons": {
+    "csvReport": "CSV Report",
+    "pdfReport": "PDF Report"
+  },
+  "kpi": {
+    "gridVoltage": "Grid Voltage",
+    "gridCurrent": "Grid Current",
+    "gridFrequency": "Grid Frequency",
+    "solarGeneration": "Solar PV Generation",
+    "batterySOC": "Battery SOC",
+    "loadDemand": "Load Demand",
+    "efficiency": "Efficiency",
+    "powerFactor": "Power Factor"
+  },
+  "output": {
+    "liveData": "Live Power Data",
+    "currentPower": "Current Power",
+    "activePower": "Active Power",
+    "reactivePower": "Reactive Power",
+    "totalEnergyGenerated": "Total Energy Generated",
+    "netEnergyExport": "Net Energy Export",
+    "power": "Power",
+    "voltage": "Voltage",
+    "current": "Current",
+    "batteryLevel": "Battery Level",
+    "irradiance": "Irradiance",
+    "temperature": "Temperature",
+    "co2SavedToday": "CO₂ Saved Today",
+    "energyGeneratedToday": "Energy Generated Today",
+    "currentCondition": "Current Condition",
+    "humidity": "Humidity",
+    "windSpeed": "Wind Speed"
+  },
+  "energy": {
+    "generatedToday": "Generated Today",
+    "consumedToday": "Consumed Today",
+    "exportedToGrid": "Exported to Grid"
+  },
+  "report": {
+    "title": "Admin Microgrid System Report",
+    "generatedDate": "Generated Date",
+    "reportType": "Report Type",
+    "adminDashboard": "Admin Dashboard",
+    "kpiSection": "Key Performance Indicators",
+    "systemOutput": "System Output Values",
+    "energyFlow": "Energy Flow Summary",
+    "additionalMetrics": "Additional Metrics",
+    "weeklyProduction": "Weekly Production",
+    "systemAlerts": "System Alerts",
+    "weatherInfo": "Weather Information",
+    "weatherForecast": "Weather Forecast",
+    "metric": "Metric",
+    "value": "Value",
+    "unit": "Unit",
+    "change": "Change",
+    "category": "Category",
+    "time": "Time",
+    "day": "Day",
+    "energy": "Energy",
+    "efficiency": "Efficiency",
+    "type": "Type",
+    "message": "Message",
+    "timestamp": "Timestamp",
+    "severity": "Severity",
+    "condition": "Condition",
+    "high": "High",
+    "low": "Low"
+  },
+  "settings_title": "Settings & Personalization",
+  "settings_subtitle": "Fine-tune your SolarTrack experience for maximum efficiency and comfort. Customize how your system interacts with the grid, set up your preferred notifications, and find answers to common questions.",
+  "grid_interaction": "Grid Interaction",
+  "auto_sell_desc": "Allow auto-sell excess energy to grid or neighbor microgrids",
+  "price_threshold": "Price threshold (₹/kWh):",
+  "notifications": "Notifications",
+  "email_alerts": "Email Alerts",
+  "sms_alerts": "SMS Alerts",
+  "push_notifications": "Push Notifications",
+  "alert_frequency": "Alert Frequency:",
+  "immediate": "Immediate ⏱️",
+  "hourly": "Hourly ⏰",
+  "daily_summary": "Daily Summary 📅",
+  "smart_configuration": "Smart Configuration",
+  "smart_configuration_desc": "Your personalized settings help optimize energy production and consumption. Our intelligent system adapts to your preferences and provides real-time recommendations for better efficiency.",
+  "auto_configuration": "Auto-Configuration",
+  "real_time_sync": "Real-time Sync",
+  "secure_settings": "Secure Settings",
+  "performance_tracking": "Performance Tracking",
+  "help_faq": "Help & FAQ",
+  "help_desc": "Need assistance? Explore our frequently asked questions or contact support for help with your solar dashboard.",
+  "show_faq": "Show FAQ",
+  "hide_faq": "Hide FAQ",
+  "faq_q1": "How do I change my notification preferences?",
+  "faq_q2": "How does auto-sell to the grid work?",
+  "faq_q3": "How do I update my settings?",
+  "faq_q4": "Who do I contact for technical support?",
+  "admin_profile": {
+    "title": "System Administrator",
+    "bio": "System Administrator with expertise in solar energy management and IoT systems. Responsible for maintaining system integrity and optimizing performance across all connected devices.",
+    "admin_level": "Super Administrator",
+    "department": "System Operations",
+    "employee_id": "ADM-2024-001",
+    "access_level": "Level 5 - Full Access",
+    "last_login": "Last login",
+    "session_duration": "Session duration",
+    "joined": "Joined",
+    "edit_profile": "Edit Profile",
+    "save_changes": "Save Changes",
+    "cancel": "Cancel",
+    "achievements_title": "Administrative Achievements",
+    "system_metrics_title": "System Metrics",
+    "activities_title": "Recent Administrative Activities",
+    "permissions_title": "Access Permissions",
+    "stats": {
+      "systems_managed": "Systems Managed",
+      "users_managed": "Users Managed",
+      "system_uptime": "System Uptime",
+      "incidents_resolved": "Incidents Resolved"
+    },
+    "metrics": {
+      "cpu_usage": "CPU Usage",
+      "memory_usage": "Memory Usage",
+      "network_load": "Network Load",
+      "storage_usage": "Storage Usage"
+    },
+    "achievements": [
+      {
+        "title": "System Guardian",
+        "description": "Maintained 99.9% uptime for 6 months",
+        "impact": "High"
+      },
+      {
+        "title": "Crisis Manager",
+        "description": "Resolved 50+ critical incidents",
+        "impact": "Critical"
+      },
+      {
+        "title": "Efficiency Expert",
+        "description": "Optimized system performance by 35%",
+        "impact": "High"
+      },
+      {
+        "title": "Team Leader",
+        "description": "Trained 20+ new administrators",
+        "impact": "Medium"
+      },
+      {
+        "title": "Security Champion",
+        "description": "Prevented 100+ security threats",
+        "impact": "Critical"
+      },
+      {
+        "title": "Innovation Driver",
+        "description": "Implemented 15+ system improvements",
+        "impact": "High"
+      }
+    ],
+    "activities": {
+      "system_backup": "System backup completed",
+      "user_access_modified": "User access modified",
+      "security_patch_applied": "Security patch applied",
+      "performance_optimization": "Performance optimization",
+      "failed_login_attempt": "Failed login attempt",
+      "system_maintenance_scheduled": "System maintenance scheduled"
+    },
+    "permissions": {
+      "system_administration": "System Administration",
+      "security": "Security",
+      "monitoring": "Monitoring",
+      "data_management": "Data Management",
+      "items": {
+        "system_administration": [
+          "Full system access",
+          "User management",
+          "System configuration",
+          "Backup management"
+        ],
+        "security": [
+          "Security policy management",
+          "Access control",
+          "Threat monitoring",
+          "Incident response"
+        ],
+        "monitoring": [
+          "Real-time monitoring",
+          "Performance analytics",
+          "Alert management",
+          "Report generation"
+        ],
+        "data_management": [
+          "Database administration",
+          "Data backup",
+          "Data recovery",
+          "Audit logs"
+        ]
+      }
+    },
+    "status": {
+      "success": "Success",
+      "warning": "Warning",
+      "error": "Error",
+      "info": "Info"
+    },
+    "activity_labels": {
+      "system": "System",
+      "user": "User",
+      "impact": "Impact",
+      "scheduled": "Scheduled"
+    }
+  },
+
+  "alerts-user": {
+    "title": "System Alerts",
+    "timestamp": "{{value}}",
+    "severity": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    },
+    "items": {
+      "lowBattery": "Battery level is below 20%. Please check your storage system.",
+      "maintenanceDue": "Scheduled maintenance due in 3 days.",
+      "systemOptimal": "System running optimally. No issues detected.",
+      "inverterFault": "Inverter fault detected. Immediate attention required!"
+    }
+  },
+  "common": {
+    "saveChanges": "Save Changes",
+    "cancel": "Cancel"
+  },
+  "profile-user": {
+    "defaultName": "Solar User",
+    "bioDefault": "Passionate about renewable energy and sustainable living. Solar enthusiast since 2024.",
+    "joinedOn": "Joined {{value, datetime}}",
+    "stats": {
+      "systemCapacity": "System Capacity",
+      "totalSavings": "Total Savings",
+      "carbonOffset": "Carbon Offset",
+      "energyGenerated": "Energy Generated"
+    },
+    "achievements": {
+      "title": "Achievements",
+      "items": {
+        "solarPioneer": {
+          "title": "Solar Pioneer",
+          "desc": "First solar installation",
+          "date": "Mar 2024"
+        },
+        "greenGuardian": {
+          "title": "Green Guardian",
+          "desc": "1 ton CO₂ offset achieved",
+          "date": "May 2024"
+        },
+        "energyEfficient": {
+          "title": "Energy Efficient",
+          "desc": "90% self-sufficiency reached",
+          "date": "Aug 2024"
+        },
+        "smartSeller": {
+          "title": "Smart Seller",
+          "desc": "First energy sale to grid",
+          "date": "Sep 2024"
+        }
+      }
+    },
+    "recentActivities": {
+      "title": "Recent Activities"
+    },
+    "activities": {
+      "soldToGrid": {
+        "activity": "Energy sold to grid",
+        "time": "2 hours ago"
+      },
+      "maintenanceReminder": {
+        "activity": "System maintenance reminder",
+        "time": "1 day ago"
+      },
+      "monthlyReport": {
+        "activity": "Monthly report generated",
+        "time": "3 days ago"
+      },
+      "achievementUnlocked": {
+        "activity": "Achievement unlocked",
+        "amount": "Smart Seller",
+        "time": "5 days ago"
+      }
+    }
+  },
+  "dashboard-users": {
+    "title": "Solar Monitoring Dashboard",
+    "subtitle": "Real-time monitoring of your solar energy system",
+    "csvReport": "CSV Report",
+    "pdfReport": "PDF Report",
+    "powerOutput": "Power Output",
+    "batteryLevel": "Battery Level",
+    "efficiency": "Efficiency",
+    "co2Saved": "CO₂ Saved Today",
+    "livePower": "Live Power Output",
+    "weeklyEnergy": "Weekly Energy Production",
+    "alerts": "Alerts",
+    "weather": "Weather Information"
+  },
+  "analytics": {
+    "title": "Analytics & Reports",
+    "subtitle": "Detailed analysis of your solar system performance",
+    "periods": {
+      "day": "Day",
+      "week": "Week",
+      "month": "Month",
+      "year": "Year"
+    },
+    "cards": {
+      "totalEnergy": "Total Energy Generated",
+      "avgEfficiency": "Average Efficiency",
+      "co2Avoided": "CO₂ Avoided",
+      "costSavings": "Cost Savings"
+    },
+    "units": {
+      "mwh": "MWh",
+      "percent": "%",
+      "tons": "tons",
+      "currency": "$"
+    },
+    "charts": {
+      "dailyEnergy": "Daily Energy Production",
+      "dailySubtitle": "Energy generation throughout the day",
+      "weeklyEnergy": "Weekly Energy Production",
+      "weeklySubtitle": "Energy generation over the past 7 days",
+      "monthlyEnergy": "Monthly Energy Production",
+      "monthlySubtitle": "Energy generation over the past 12 months",
+      "yearlyEnergy": "Yearly Energy Production",
+      "yearlySubtitle": "Energy generation over the past 5 years",
+      "efficiencyTrend": "Efficiency Trend",
+      "efficiencySubtitle": "System efficiency over time"
+    },
+    "stats": {
+      "totalEnergyValue": "14.47",
+      "totalEnergyChange": "+15.2%",
+      "avgEfficiencyValue": "92.1",
+      "avgEfficiencyChange": "+3.4%",
+      "co2AvoidedValue": "8.6",
+      "co2AvoidedChange": "+18.7%",
+      "costSavingsValue": "3,240",
+      "costSavingsChange": "+22.1%"
+    },
+    "insights": {
+      "title": "Performance Insights",
+      "keyFindings": "Key Findings",
+      "recommendations": "Recommendations",
+      "peakSummer": "Peak performance achieved during summer months (June–August)",
+      "efficiencyImproved": "System efficiency has improved by 3.4% compared to last year",
+      "maintenanceWindow": "Optimal maintenance window: March and September",
+      "cleanBeforePeak": "Consider panel cleaning before peak season",
+      "monitorPanel3": "Monitor Panel 3 performance closely",
+      "scheduleInverter": "Schedule inverter inspection next quarter"
+    }
+  },
+    "analytics-user": {
+    "title": "Analytics & Reports",
+    "subtitle": "Detailed analysis of your solar system performance",
+    "periods": {
+      "day": "Day",
+      "week": "Week",
+      "month": "Month",
+      "year": "Year"
+    },
+    "cards": {
+      "totalEnergy": "Total Energy Generated",
+      "avgEfficiency": "Average Efficiency",
+      "co2Avoided": "CO₂ Avoided",
+      "costSavings": "Cost Savings"
+    },
+    "units": {
+      "mwh": "MWh",
+      "percent": "%",
+      "tons": "tons",
+      "currency": "$"
+    },
+    "charts": {
+      "dailyEnergy": "Daily Energy Production",
+      "dailySubtitle": "Energy generation throughout the day",
+      "weeklyEnergy": "Weekly Energy Production",
+      "weeklySubtitle": "Energy generation over the past 7 days",
+      "monthlyEnergy": "Monthly Energy Production",
+      "monthlySubtitle": "Energy generation over the past 12 months",
+      "yearlyEnergy": "Yearly Energy Production",
+      "yearlySubtitle": "Energy generation over the past 5 years",
+      "efficiencyTrend": "Efficiency Trend",
+      "efficiencySubtitle": "System efficiency over time"
+    },
+    "insights": {
+      "title": "Performance Insights",
+      "keyFindings": "Key Findings",
+      "recommendationsTitle": "Recommendations",
+      "findings": {
+        "peakPerformance": "Peak performance achieved during summer months (June-August)",
+        "efficiencyImproved": "System efficiency has improved by 3.4% compared to last year",
+        "maintenanceWindow": "Optimal maintenance window: March and September"
+      },
+      "recommendations": {
+        "panelCleaning": "Consider panel cleaning before peak season",
+        "monitorPanel": "Monitor Panel 3 performance closely",
+        "inverterInspection": "Schedule inverter inspection next quarter"
+      }
+    }
+  },
+
+  "solarCard": {
+    "title": "Solar Analytics",
+    "currentSolarInput": "Current Solar Input",
+    "efficiency": "Efficiency",
+    "sourceContribution": "Source Contribution",
+    "solarGenerationHistory": "Solar Generation History",
+    "todaysProfile": "Today's profile",
+    "currentMix": "Current mix",
+    "solarPerformance": "Solar Performance",
+    "solarPerformanceDesc": "Excellent generation conditions - Peak efficiency achieved",
+    "optimal": "Optimal",
+    "todaysTotal": "Today's Total",
+    "peakPower": "Peak Power",
+    "avgEfficiency": "Avg Efficiency",
+    "co2Saved": "CO₂ Saved",
+    "units": {
+      "kw": "kW",
+      "percent": "%"
+    },
+    "sources": {
+      "solar": "Solar",
+      "grid": "Grid",
+      "battery": "Battery"
+    }
+  },
+
+  "bhm": {
+    "title": "Battery Health Management (BHM)",
+    "socTrend": "SoC Trend",
+    "last24Hours": "Last 24 hours",
+    "stateOfCharge": "State of Charge",
+    "stateOfHealth": "State of Health",
+    "temperature": "Temperature",
+    "cycles": "Cycles",
+    "chargeRate": "Charge Rate",
+    "chargeChange": "+5.2% from last hour",
+    "dischargeRate": "Discharge Rate",
+    "dischargeChange": "-2.8% from last hour",
+    "batteryStatus": "Battery Status",
+    "batteryStatusDesc": "Optimal performance - All systems normal",
+    "healthy": "Healthy",
+    "units": {
+      "percent": "%",
+      "celsius": "°C",
+      "kw": "kW"
+    }
+  },
+
+  "footer": {
+    "missionLine1": "Empowering you to monitor, optimize, and maximize your solar energy.",
+    "missionLine2": "Clean energy, bright future.",
+    "quickLinks": "Quick Links",
+    "contact": "Contact",
+    "feedback": "We'd love to hear your feedback!"
+  }
+ 
+}

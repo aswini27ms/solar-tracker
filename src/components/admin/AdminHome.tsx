@@ -1,16 +1,21 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Sun, Moon } from "lucide-react";
+import { useTheme } from "../../contexts/ThemeContext";
 import { useUser } from "../../contexts/UserContext";
 import LottieAnimation from "../LottieAnimation";
 import solarAnimation from "../../assets/animations/solar.json";
 import solar1Animation from "../../assets/animations/solar1.json";
+import { useTranslation } from "react-i18next";
 
 interface HomeProps {
   setActiveTab: (tab: string) => void;
 }
 
 const Home: React.FC<HomeProps> = ({ setActiveTab }) => {
+  const { isDark, toggleTheme } = useTheme();
   const { user } = useUser();
+  const { t } = useTranslation();
 
   return (
   <div className="min-h-screen bg-gradient-to-br from-yellow-100 via-orange-100 to-blue-200 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4 sm:p-6 lg:p-8 flex flex-col items-center justify-center relative overflow-x-hidden w-full">
@@ -26,7 +31,7 @@ const Home: React.FC<HomeProps> = ({ setActiveTab }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            Welcome to SolarTrack
+            {t('home_hero_title')}
           </motion.h1>
           <motion.p 
             className="text-base sm:text-lg md:text-xl text-blue-800 dark:text-blue-200 mb-8 leading-relaxed"
@@ -34,7 +39,7 @@ const Home: React.FC<HomeProps> = ({ setActiveTab }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Your all-in-one platform to monitor, analyze, and optimize your solar energy system. Harness the power of the sun with real-time insights and smart analytics.
+            {t('home_hero_desc')}
           </motion.p>
           {user && (
             <motion.div 
@@ -47,7 +52,7 @@ const Home: React.FC<HomeProps> = ({ setActiveTab }) => {
                 onClick={() => setActiveTab('dashboard')}
                 className="px-8 py-3 bg-gradient-to-r from-orange-500 to-yellow-400 hover:from-orange-600 hover:to-yellow-500 text-white rounded-lg shadow-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105"
               >
-                Go to Dashboard
+                {t('home_dashboard_btn')}
               </button>
             </motion.div>
           )}
@@ -63,7 +68,7 @@ const Home: React.FC<HomeProps> = ({ setActiveTab }) => {
                 onClick={() => setActiveTab('login')}
                 className="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-400 hover:from-blue-600 hover:to-purple-500 text-white rounded-lg shadow-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105"
               >
-                Get Started
+                {t('home_get_started_btn')}
               </button>
             </motion.div>
           )}
@@ -114,7 +119,7 @@ const Home: React.FC<HomeProps> = ({ setActiveTab }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.4 }}
             >
-              Maximize Your Solar Potential
+              {t('home_maximize_title')}
             </motion.h2>
             <motion.p 
               className="text-lg text-blue-800 dark:text-blue-200 mb-6 leading-relaxed max-w-2xl"
@@ -122,7 +127,7 @@ const Home: React.FC<HomeProps> = ({ setActiveTab }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.6 }}
             >
-              Experience cutting-edge solar monitoring technology that adapts to your needs. Our intelligent system learns from your usage patterns and provides personalized recommendations to optimize your energy efficiency.
+              {t('home_maximize_desc')}
             </motion.p>
             <motion.div 
               className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-lg"
@@ -132,19 +137,19 @@ const Home: React.FC<HomeProps> = ({ setActiveTab }) => {
             >
               <div className="flex items-center space-x-3 p-4 bg-white/50 dark:bg-gray-700/50 rounded-lg backdrop-blur-sm">
                 <span className="text-2xl">🔋</span>
-                <span className="text-gray-700 dark:text-gray-300 font-medium">Energy Storage</span>
+                <span className="text-gray-700 dark:text-gray-300 font-medium">{t('home_feature_energy_storage')}</span>
               </div>
               <div className="flex items-center space-x-3 p-4 bg-white/50 dark:bg-gray-700/50 rounded-lg backdrop-blur-sm">
                 <span className="text-2xl">🌱</span>
-                <span className="text-gray-700 dark:text-gray-300 font-medium">Eco-Friendly</span>
+                <span className="text-gray-700 dark:text-gray-300 font-medium">{t('home_feature_eco_friendly')}</span>
               </div>
               <div className="flex items-center space-x-3 p-4 bg-white/50 dark:bg-gray-700/50 rounded-lg backdrop-blur-sm">
                 <span className="text-2xl">💰</span>
-                <span className="text-gray-700 dark:text-gray-300 font-medium">Cost Savings</span>
+                <span className="text-gray-700 dark:text-gray-300 font-medium">{t('home_feature_cost_savings')}</span>
               </div>
               <div className="flex items-center space-x-3 p-4 bg-white/50 dark:bg-gray-700/50 rounded-lg backdrop-blur-sm">
                 <span className="text-2xl">📱</span>
-                <span className="text-gray-700 dark:text-gray-300 font-medium">Mobile Ready</span>
+                <span className="text-gray-700 dark:text-gray-300 font-medium">{t('home_feature_mobile_ready')}</span>
               </div>
             </motion.div>
           </div>
@@ -161,25 +166,17 @@ const Home: React.FC<HomeProps> = ({ setActiveTab }) => {
           whileHover={{ y: -5 }}
         >
           <span className="text-4xl mb-4 animate-bounce">🌞</span>
-          <h2 className="font-bold text-xl mb-3 text-orange-700 dark:text-yellow-100">Live Monitoring</h2>
-          <p className="text-gray-700 dark:text-gray-300 text-center leading-relaxed">Track your solar panel output and system status in real time, anytime, anywhere.</p>
+          <h2 className="font-bold text-xl mb-3 text-orange-700 dark:text-yellow-100">{t('home_card_live_monitoring_title')}</h2>
+          <p className="text-gray-700 dark:text-gray-300 text-center leading-relaxed">{t('home_card_live_monitoring_desc')}</p>
         </motion.div>
 
         <motion.div 
-          className="bg-gradient-to-br from-blue-100 via-white to-yellow-100 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 rounded-xl shadow-lg p-6 flex flex-col items-center border border-blue-100 dark:border-gray-700 hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+          className="bg-gradient-to-br from-blue-100 via-white to-yellow-100 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 rounded-xl shadow-lg p-6 flex flex-col items-center border border-blue-100 dark:border-gray-700 hover:shadow-xl transition-shadow duration-300"
           whileHover={{ y: -5 }}
-          onClick={() => setActiveTab('analytics')}
         >
           <span className="text-4xl mb-4 animate-pulse">📊</span>
-          <h2 className="font-bold text-xl mb-3 text-blue-700 dark:text-yellow-100">Advanced Analytics</h2>
-          <p className="text-gray-700 dark:text-gray-300 text-center leading-relaxed">Visualize energy production, consumption, and savings with interactive charts and reports.</p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors text-sm"
-          >
-            Explore Analytics
-          </motion.button>
+          <h2 className="font-bold text-xl mb-3 text-blue-700 dark:text-yellow-100">{t('home_card_advanced_analytics_title')}</h2>
+          <p className="text-gray-700 dark:text-gray-300 text-center leading-relaxed">{t('home_card_advanced_analytics_desc')}</p>
         </motion.div>
 
         <motion.div 
@@ -187,8 +184,8 @@ const Home: React.FC<HomeProps> = ({ setActiveTab }) => {
           whileHover={{ y: -5 }}
         >
           <span className="text-4xl mb-4 animate-bounce">⚡</span>
-          <h2 className="font-bold text-xl mb-3 text-orange-700 dark:text-yellow-100">Smart Alerts</h2>
-          <p className="text-gray-700 dark:text-gray-300 text-center leading-relaxed">Get instant notifications for system issues, maintenance reminders, and performance tips.</p>
+          <h2 className="font-bold text-xl mb-3 text-orange-700 dark:text-yellow-100">{t('home_card_smart_alerts_title')}</h2>
+          <p className="text-gray-700 dark:text-gray-300 text-center leading-relaxed">{t('home_card_smart_alerts_desc')}</p>
         </motion.div>
       </motion.div>
     </div>

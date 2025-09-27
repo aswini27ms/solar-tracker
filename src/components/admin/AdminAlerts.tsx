@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTelemetry } from '../../contexts/TelemetryContext';
 import { AlertTriangle, CheckCircle, Info, X, Clock } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const AdminAlerts: React.FC = () => {
+  const { t } = useTranslation();
   const { alerts, acknowledgeAlert, acknowledgeAllAlerts } = useTelemetry();
   const [filter, setFilter] = useState<'all' | 'critical' | 'warning' | 'info'>('all');
 
@@ -89,10 +91,10 @@ const AdminAlerts: React.FC = () => {
         {/* Header */}
         <motion.div variants={itemVariants} className="mb-8">
           <h1 className="text-3xl font-bold text-orange-700 dark:text-yellow-100 mb-2">
-            System Alerts
+            {t('admin_alerts_title')}
           </h1>
           <p className="text-blue-800 dark:text-blue-200">
-            Monitor and manage system alerts and notifications
+            {t('admin_alerts_subtitle')}
           </p>
         </motion.div>
 
@@ -107,7 +109,7 @@ const AdminAlerts: React.FC = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-red-600 dark:text-red-400 text-sm font-medium">
-                    Critical Alerts
+                    {t('admin_alerts_critical')}
                   </p>
                   <p className="text-3xl font-bold text-red-700 dark:text-red-300">
                     {criticalCount}
@@ -125,7 +127,7 @@ const AdminAlerts: React.FC = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-yellow-600 dark:text-yellow-400 text-sm font-medium">
-                    Warning Alerts
+                    {t('admin_alerts_warning')}
                   </p>
                   <p className="text-3xl font-bold text-yellow-700 dark:text-yellow-300">
                     {warningCount}
@@ -143,7 +145,7 @@ const AdminAlerts: React.FC = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-blue-600 dark:text-blue-400 text-sm font-medium">
-                    Info Alerts
+                    {t('admin_alerts_info')}
                   </p>
                   <p className="text-3xl font-bold text-blue-700 dark:text-blue-300">
                     {infoCount}
@@ -166,7 +168,7 @@ const AdminAlerts: React.FC = () => {
                   : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
             >
-              All Alerts ({alerts.length})
+              {t('admin_alerts_all')} ({alerts.length})
             </button>
             <button
               onClick={() => setFilter('critical')}
@@ -176,7 +178,7 @@ const AdminAlerts: React.FC = () => {
                   : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
             >
-              Critical ({criticalCount})
+              {t('admin_alerts_critical')} ({criticalCount})
             </button>
             <button
               onClick={() => setFilter('warning')}
@@ -186,7 +188,7 @@ const AdminAlerts: React.FC = () => {
                   : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
             >
-              Warning ({warningCount})
+              {t('admin_alerts_warning')} ({warningCount})
             </button>
             <button
               onClick={() => setFilter('info')}
@@ -196,7 +198,7 @@ const AdminAlerts: React.FC = () => {
                   : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
             >
-              Info ({infoCount})
+              {t('admin_alerts_info')} ({infoCount})
             </button>
           </div>
         </motion.div>
@@ -212,10 +214,10 @@ const AdminAlerts: React.FC = () => {
               >
                 <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                  No active alerts
+                  {t('admin_alerts_none')}
                 </h3>
                 <p className="text-gray-500 dark:text-gray-400">
-                  All systems are operating normally
+                  {t('admin_alerts_all_normal')}
                 </p>
               </motion.div>
             ) : (
@@ -240,14 +242,14 @@ const AdminAlerts: React.FC = () => {
                           <div className="flex items-center space-x-2 mb-1">
                             <span className={`inline-block w-2 h-2 ${config.badgeColor} rounded-full`}></span>
                             <span className={`text-sm font-medium ${config.textColor} capitalize`}>
-                              {alert.severity}
+                              {t(`alert_severity_${alert.severity}`)}
                             </span>
                             <span className="text-xs text-gray-500 dark:text-gray-400">
-                              • {alert.category}
+                              • {t(`alert_category_${alert.category}`)}
                             </span>
                           </div>
                           <p className={`text-gray-800 dark:text-gray-200 mb-2`}>
-                            {alert.message}
+                            {t(`alert_message_${alert.message}`, alert.message)}
                           </p>
                           <div className="flex items-center text-xs text-gray-500 dark:text-gray-400">
                             <Clock className="w-3 h-3 mr-1" />
@@ -283,7 +285,7 @@ const AdminAlerts: React.FC = () => {
               onClick={acknowledgeAllAlerts}
               className="px-6 py-3 bg-gradient-to-r from-orange-500 to-yellow-400 hover:from-orange-600 hover:to-yellow-500 text-white rounded-lg font-medium transition-all duration-300 shadow-lg"
             >
-              Acknowledge All Alerts
+              {t('admin_alerts_ack_all')}
             </motion.button>
           </motion.div>
         )}

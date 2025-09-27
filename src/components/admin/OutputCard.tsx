@@ -3,12 +3,14 @@ import { motion } from 'framer-motion';
 import ChartCard from '../ChartCard';
 import StatCard from '../StatCard';
 import { Zap, TrendingUp, Battery, Activity } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface OutputCardProps {
   data: Array<{ time: string; power: number }>;
 }
 
 const OutputCard: React.FC<OutputCardProps> = ({ data }) => {
+  const { t } = useTranslation();
   return (
     <div className="space-y-6">
       {/* Active Power Chart */}
@@ -18,8 +20,8 @@ const OutputCard: React.FC<OutputCardProps> = ({ data }) => {
         transition={{ delay: 0.5 }}
       >
         <ChartCard
-          title="Active Power Output"
-          subtitle="Real-time active power generation across all microgrids"
+          title={t('dashboard-users.livePower')}
+          subtitle={t('output.liveData')}
           data={data}
           type="line"
           dataKey="power"
@@ -37,7 +39,7 @@ const OutputCard: React.FC<OutputCardProps> = ({ data }) => {
           transition={{ delay: 0.6 }}
         >
           <StatCard
-            title="Active Power"
+            title={t('output.activePower')}
             value={245.8}
             unit="kW"
             icon={Zap}
@@ -53,7 +55,7 @@ const OutputCard: React.FC<OutputCardProps> = ({ data }) => {
           transition={{ delay: 0.7 }}
         >
           <StatCard
-            title="Reactive Power"
+            title={t('output.reactivePower')}
             value={45.2}
             unit="kVAR"
             icon={Activity}
@@ -69,7 +71,7 @@ const OutputCard: React.FC<OutputCardProps> = ({ data }) => {
           transition={{ delay: 0.8 }}
         >
           <StatCard
-            title="Total Energy Generated"
+            title={t('output.totalEnergyGenerated')}
             value={1247.5}
             unit="kWh"
             icon={Battery}
@@ -85,7 +87,7 @@ const OutputCard: React.FC<OutputCardProps> = ({ data }) => {
           transition={{ delay: 0.9 }}
         >
           <StatCard
-            title="Net Energy Export"
+            title={t('output.netEnergyExport')}
             value={89.3}
             unit="kWh"
             icon={TrendingUp}
@@ -102,19 +104,19 @@ const OutputCard: React.FC<OutputCardProps> = ({ data }) => {
         transition={{ delay: 1.0 }}
         className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6"
       >
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Energy Flow Summary</h3>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">{t('report.energyFlow')}</h3>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="text-center">
             <div className="text-2xl font-bold text-green-600 dark:text-green-400">+156.8 kWh</div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">Generated Today</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">{t('energy.generatedToday')}</div>
           </div>
           <div className="text-center">
             <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">67.5 kWh</div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">Consumed Today</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">{t('energy.consumedToday')}</div>
           </div>
           <div className="text-center">
             <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">+89.3 kWh</div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">Exported to Grid</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">{t('energy.exportedToGrid')}</div>
           </div>
         </div>
       </motion.div>

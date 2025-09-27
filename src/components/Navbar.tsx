@@ -15,6 +15,7 @@ import {
   Menu
 } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 interface NavbarProps {
   activeTab: string;
@@ -25,29 +26,30 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
   const { isDark, toggleTheme } = useTheme();
   const { user, setUser } = useUser();
+  const { t, i18n } = useTranslation();
 
   const navItems = user ? (
     user.role === 'admin' ? [
-      { id: 'admin-home', label: 'Home', icon: Home },
-      { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
-      { id: 'analytics', label: 'Analytics', icon: TrendingUp },
-      { id: 'alerts', label: 'Alerts', icon: AlertTriangle },
-      { id: 'settings', label: 'Settings', icon: Settings },
-      { id: 'profile', label: 'Profile', icon: User },
-      { id: 'usermanual', label: 'User Manual', icon: BookOpen },
+      { id: 'admin-home', label: t('home'), icon: Home },
+      { id: 'dashboard', label: t('dashboard'), icon: BarChart3 },
+      { id: 'analytics-nav', label: t('analytics-nav'), icon: TrendingUp },
+      { id: 'alerts', label: t('alerts'), icon: AlertTriangle },
+      { id: 'settings', label: t('settings'), icon: Settings },
+      { id: 'profile', label: t('profile'), icon: User },
+      { id: 'usermanual', label: t('usermanual'), icon: BookOpen },
     ] : [
-      { id: 'home', label: 'Home', icon: Home },
-      { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
-      { id: 'analytics', label: 'Analytics', icon: TrendingUp },
-      { id: 'alerts', label: 'Alerts', icon: AlertTriangle },
-      { id: 'settings', label: 'Settings', icon: Settings },
-      { id: 'profile', label: 'Profile', icon: User },
-      { id: 'usermanual', label: 'User Manual', icon: BookOpen },
+      { id: 'home', label: t('home'), icon: Home },
+      { id: 'dashboard', label: t('dashboard'), icon: BarChart3 },
+      { id: 'analytics-nav', label: t('analytics-nav'), icon: TrendingUp },
+      { id: 'alerts', label: t('alerts'), icon: AlertTriangle },
+      { id: 'settings', label: t('settings'), icon: Settings },
+      { id: 'profile', label: t('profile'), icon: User },
+      { id: 'usermanual', label: t('usermanual'), icon: BookOpen },
     ]
   ) : [
-    { id: 'home', label: 'Home', icon: Home },
-    { id: 'login', label: 'Login', icon: LogIn },
-    { id: 'usermanual', label: 'User Manual', icon: BookOpen },
+    { id: 'home', label: t('home'), icon: Home },
+    { id: 'login', label: t('login'), icon: LogIn },
+    { id: 'usermanual', label: t('usermanual'), icon: BookOpen },
   ];
 
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -58,6 +60,31 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
       animate={{ y: 0 }}
       className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-200 dark:border-gray-800"
     >
+      {/* Language Switcher */}
+      <div className="flex justify-end px-4 py-2 gap-2">
+        <button
+          onClick={() => i18n.changeLanguage('en')}
+          disabled={i18n.language === 'en'}
+          className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+            i18n.language === 'en'
+              ? 'bg-orange-500 text-white'
+              : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-orange-100 dark:hover:bg-orange-900/20'
+          }`}
+        >
+          English
+        </button>
+        <button
+          onClick={() => i18n.changeLanguage('ta')}
+          disabled={i18n.language === 'ta'}
+          className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+            i18n.language === 'ta'
+              ? 'bg-orange-500 text-white'
+              : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-orange-100 dark:hover:bg-orange-900/20'
+          }`}
+        >
+          தமிழ்
+        </button>
+      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center h-16 justify-between w-full">
           {/* Logo and Name Left-Aligned */}
@@ -75,12 +102,14 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
           </motion.div>
 
           {/* Navigation Items Center-Aligned */}
-          <div className="hidden md:flex flex-1 justify-center items-center gap-6">
+          <div className="hidden md:flex flex-1 justify-center items-center gap-3">
             {navItems.map((item) => (
               <motion.button
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={`flex items-center space-x-1 px-2 py-2 rounded-lg font-medium transition-colors ${
+                  i18n.language === 'ta' ? 'text-xs' : 'text-sm'
+                } ${
                   activeTab === item.id
                     ? 'text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20'
                     : 'text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400'
@@ -105,7 +134,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
                 whileTap={{ scale: 0.95 }}
               >
                 <LogIn className="w-4 h-4" />
-                <span>Logout</span>
+                <span>{t('logout', 'Logout')}</span>
               </motion.button>
             )}
           </div>
@@ -157,7 +186,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
                   className="flex items-center space-x-2 px-4 py-3 rounded-lg text-base font-medium transition-colors text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-800"
                 >
                   <LogIn className="w-5 h-5" />
-                  <span>Logout</span>
+                  <span>{t('logout', 'Logout')}</span>
                 </button>
               )}
             </div>

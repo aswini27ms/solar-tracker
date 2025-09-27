@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import ChartCard from './ChartCard';
 
 const Analytics: React.FC = () => {
+  const { t } = useTranslation();
   const [selectedPeriod, setSelectedPeriod] = useState('Month');
 
   // Data for different time periods
@@ -56,36 +58,36 @@ const Analytics: React.FC = () => {
         return {
           data: dailyData,
           xAxisKey: 'time',
-          title: 'Daily Energy Production',
-          subtitle: 'Energy generation throughout the day'
+          title: t('analytics-user.charts.dailyEnergy'),
+          subtitle: t('analytics-user.charts.dailySubtitle')
         };
       case 'Week':
         return {
           data: weeklyData,
           xAxisKey: 'week',
-          title: 'Weekly Energy Production',
-          subtitle: 'Energy generation over the past 7 days'
+          title: t('analytics-user.charts.weeklyEnergy'),
+          subtitle: t('analytics-user.charts.weeklySubtitle')
         };
       case 'Month':
         return {
           data: monthlyData,
           xAxisKey: 'month',
-          title: 'Monthly Energy Production',
-          subtitle: 'Energy generation over the past 12 months'
+          title: t('analytics-user.charts.monthlyEnergy'),
+          subtitle: t('analytics-user.charts.monthlySubtitle')
         };
       case 'Year':
         return {
           data: yearlyData,
           xAxisKey: 'year',
-          title: 'Yearly Energy Production',
-          subtitle: 'Energy generation over the past 5 years'
+          title: t('analytics-user.charts.yearlyEnergy'),
+          subtitle: t('analytics-user.charts.yearlySubtitle')
         };
       default:
         return {
           data: monthlyData,
           xAxisKey: 'month',
-          title: 'Monthly Energy Production',
-          subtitle: 'Energy generation over the past 12 months'
+          title: t('analytics-user.charts.monthlyEnergy'),
+          subtitle: t('analytics-user.charts.monthlySubtitle')
         };
     }
   };
@@ -93,10 +95,10 @@ const Analytics: React.FC = () => {
   const currentData = getCurrentData();
 
   const yearlyStats = [
-    { metric: 'Total Energy Generated', value: '14.47', unit: 'MWh', change: '+15.2%' },
-    { metric: 'Average Efficiency', value: '92.1', unit: '%', change: '+3.4%' },
-    { metric: 'CO₂ Avoided', value: '8.6', unit: 'tons', change: '+18.7%' },
-    { metric: 'Cost Savings', value: '$3,240', unit: '', change: '+22.1%' }
+    { metric: t('analytics-user.cards.totalEnergy'), value: '14.47', unit: t('analytics-user.units.mwh'), change: '+15.2%' },
+    { metric: t('analytics-user.cards.avgEfficiency'), value: '92.1', unit: t('analytics-user.units.percent'), change: '+3.4%' },
+    { metric: t('analytics-user.cards.co2Avoided'), value: '8.6', unit: t('analytics-user.units.tons'), change: '+18.7%' },
+    { metric: t('analytics-user.cards.costSavings'), value: `${t('analytics-user.units.currency')}3,240`, unit: '', change: '+22.1%' }
   ];
 
   return (
@@ -113,10 +115,10 @@ const Analytics: React.FC = () => {
           className="mb-8"
         >
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-            Analytics & Reports
+            {t('analytics-user.title')}
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
-            Detailed analysis of your solar system performance
+            {t('analytics-user.subtitle')}
           </p>
         </motion.div>
 
@@ -139,7 +141,10 @@ const Analytics: React.FC = () => {
                   : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-orange-50 dark:hover:bg-orange-900/20 hover:text-orange-600 dark:hover:text-orange-400 hover:border-orange-200 dark:hover:border-orange-800'
               }`}
             >
-              {period}
+              {period === 'Day' && t('analytics-user.periods.day')}
+              {period === 'Week' && t('analytics-user.periods.week')}
+              {period === 'Month' && t('analytics-user.periods.month')}
+              {period === 'Year' && t('analytics-user.periods.year')}
             </motion.button>
           ))}
         </motion.div>
@@ -187,8 +192,8 @@ const Analytics: React.FC = () => {
           />
           
           <ChartCard
-            title="Efficiency Trend"
-            subtitle="System efficiency over time"
+            title={t('analytics-user.charts.efficiencyTrend')}
+            subtitle={t('analytics-user.charts.efficiencySubtitle')}
             data={currentData.data}
             type="line"
             dataKey="efficiency"
@@ -206,31 +211,31 @@ const Analytics: React.FC = () => {
           className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-gray-700"
         >
           <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
-            Performance Insights
+            {t('analytics-user.insights.title')}
           </h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
               <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
-                Key Findings
+                {t('analytics-user.insights.keyFindings')}
               </h4>
               <ul className="space-y-3">
                 <li className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
                   <p className="text-gray-600 dark:text-gray-400">
-                    Peak performance achieved during summer months (June-August)
+                    {t('analytics-user.insights.findings.peakPerformance')}
                   </p>
                 </li>
                 <li className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
                   <p className="text-gray-600 dark:text-gray-400">
-                    System efficiency has improved by 3.4% compared to last year
+                    {t('analytics-user.insights.findings.efficiencyImproved')}
                   </p>
                 </li>
                 <li className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-orange-500 rounded-full mt-2"></div>
                   <p className="text-gray-600 dark:text-gray-400">
-                    Optimal maintenance window: March and September
+                    {t('analytics-user.insights.findings.maintenanceWindow')}
                   </p>
                 </li>
               </ul>
@@ -238,25 +243,25 @@ const Analytics: React.FC = () => {
             
             <div>
               <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
-                Recommendations
+                {t('analytics-user.insights.recommendationsTitle')}
               </h4>
               <ul className="space-y-3">
                 <li className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2"></div>
                   <p className="text-gray-600 dark:text-gray-400">
-                    Consider panel cleaning before peak season
+                    {t('analytics-user.insights.recommendations.panelCleaning')}
                   </p>
                 </li>
                 <li className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-purple-500 rounded-full mt-2"></div>
                   <p className="text-gray-600 dark:text-gray-400">
-                    Monitor Panel 3 performance closely
+                    {t('analytics-user.insights.recommendations.monitorPanel')}
                   </p>
                 </li>
                 <li className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
                   <p className="text-gray-600 dark:text-gray-400">
-                    Schedule inverter inspection next quarter
+                    {t('analytics-user.insights.recommendations.inverterInspection')}
                   </p>
                 </li>
               </ul>

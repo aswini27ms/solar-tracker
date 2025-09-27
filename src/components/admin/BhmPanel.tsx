@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Battery, TrendingUp, Heart, Thermometer, Zap, Activity } from 'lucide-react';
+import { Battery, Heart, Thermometer, Zap, Activity } from 'lucide-react';
 import StatCard from '../StatCard';
+import { useTranslation } from 'react-i18next';
 
 const BhmPanel = () => {
+  const { t } = useTranslation();
   const [socData, setSocData] = useState([
     { time: '00:00', soc: 65 },
     { time: '04:00', soc: 62 },
@@ -47,8 +49,8 @@ const BhmPanel = () => {
     return (
       <div className="w-full h-48 bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
         <div className="flex justify-between items-center mb-2">
-          <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300">SoC Trend</h3>
-          <span className="text-xs text-gray-500 dark:text-gray-400">Last 24 hours</span>
+          <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('bhm.socTrend')}</h3>
+          <span className="text-xs text-gray-500 dark:text-gray-400">{t('bhm.last24Hours')}</span>
         </div>
         <div className="relative h-32">
           {/* Grid lines */}
@@ -123,48 +125,48 @@ const BhmPanel = () => {
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center">
           <Battery className="w-6 h-6 mr-2 text-blue-500" />
-          Battery Health Management (BHM)
+          {t('bhm.title')}
         </h2>
       </div>
 
       {/* Battery Metrics Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <motion.div variants={itemVariants}>
+        <motion.div variants={itemVariants} className="h-full">
           <StatCard
-            title="State of Charge"
+            title={t('bhm.stateOfCharge')}
             value={72.5}
-            unit="%"
+            unit={t('bhm.units.percent')}
             icon={Battery}
             change="-2.1%"
             changeType="negative"
           />
         </motion.div>
         
-        <motion.div variants={itemVariants}>
+        <motion.div variants={itemVariants} className="h-full">
           <StatCard
-            title="State of Health"
+            title={t('bhm.stateOfHealth')}
             value={94.2}
-            unit="%"
+            unit={t('bhm.units.percent')}
             icon={Heart}
             change="+0.3%"
             changeType="positive"
           />
         </motion.div>
         
-        <motion.div variants={itemVariants}>
+        <motion.div variants={itemVariants} className="h-full">
           <StatCard
-            title="Temperature"
+            title={t('bhm.temperature')}
             value={28.5}
-            unit="°C"
+            unit={t('bhm.units.celsius')}
             icon={Thermometer}
             change="+1.2%"
             changeType="positive"
           />
         </motion.div>
         
-        <motion.div variants={itemVariants}>
+        <motion.div variants={itemVariants} className="h-full">
           <StatCard
-            title="Cycles"
+            title={t('bhm.cycles')}
             value={1247}
             unit=""
             icon={Activity}
@@ -181,26 +183,26 @@ const BhmPanel = () => {
 
       {/* Charge/Discharge Rates */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <motion.div variants={itemVariants}>
+        <motion.div variants={itemVariants} className="h-full">
           <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 border border-green-200 dark:border-green-800">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-lg font-semibold text-green-800 dark:text-green-200">Charge Rate</h3>
-                <p className="text-2xl font-bold text-green-600 dark:text-green-400">45.8 kW</p>
-                <p className="text-sm text-green-600 dark:text-green-400">+5.2% from last hour</p>
+                <h3 className="text-lg font-semibold text-green-800 dark:text-green-200">{t('bhm.chargeRate')}</h3>
+                <p className="text-2xl font-bold text-green-600 dark:text-green-400">45.8 {t('bhm.units.kw')}</p>
+                <p className="text-sm text-green-600 dark:text-green-400">{t('bhm.chargeChange')}</p>
               </div>
               <Zap className="w-8 h-8 text-green-500" />
             </div>
           </div>
         </motion.div>
         
-        <motion.div variants={itemVariants}>
+        <motion.div variants={itemVariants} className="h-full">
           <div className="bg-red-50 dark:bg-red-900/20 rounded-lg p-4 border border-red-200 dark:border-red-800">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-lg font-semibold text-red-800 dark:text-red-200">Discharge Rate</h3>
-                <p className="text-2xl font-bold text-red-600 dark:text-red-400">32.4 kW</p>
-                <p className="text-sm text-red-600 dark:text-red-400">-2.8% from last hour</p>
+                <h3 className="text-lg font-semibold text-red-800 dark:text-red-200">{t('bhm.dischargeRate')}</h3>
+                <p className="text-2xl font-bold text-red-600 dark:text-red-400">32.4 {t('bhm.units.kw')}</p>
+                <p className="text-sm text-red-600 dark:text-red-400">{t('bhm.dischargeChange')}</p>
               </div>
               <Zap className="w-8 h-8 text-red-500" />
             </div>
@@ -212,12 +214,12 @@ const BhmPanel = () => {
       <motion.div variants={itemVariants} className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-lg font-semibold text-blue-800 dark:text-blue-200">Battery Status</h3>
-            <p className="text-blue-600 dark:text-blue-400">Optimal performance - All systems normal</p>
+            <h3 className="text-lg font-semibold text-blue-800 dark:text-blue-200">{t('bhm.batteryStatus')}</h3>
+            <p className="text-blue-600 dark:text-blue-400">{t('bhm.batteryStatusDesc')}</p>
           </div>
           <div className="text-right">
             <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-              Healthy
+              {t('bhm.healthy')}
             </span>
           </div>
         </div>

@@ -39,7 +39,7 @@ function App() {
           } else {
             return <Dashboard />;
           }
-        case 'analytics':
+        case 'analytics-nav':
           if (user && user.role === 'admin') {
             return <AdminAnalytics />;
           } else {

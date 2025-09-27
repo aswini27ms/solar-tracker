@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
 import { Zap, Battery, Gauge, Activity, TrendingUp, Cpu } from 'lucide-react';
 import StatCard from '../StatCard';
+import { useTranslation } from 'react-i18next';
 
 const KPICards = () => {
+  const { t } = useTranslation();
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {/* Grid Voltage */}
@@ -12,7 +14,7 @@ const KPICards = () => {
         transition={{ delay: 0.1 }}
       >
         <StatCard
-          title="Grid Voltage"
+          title={t('kpi.gridVoltage')}
           value={230.5}
           unit="V"
           icon={Zap}
@@ -28,7 +30,7 @@ const KPICards = () => {
         transition={{ delay: 0.2 }}
       >
         <StatCard
-          title="Grid Current"
+          title={t('kpi.gridCurrent')}
           value={45.2}
           unit="A"
           icon={Activity}
@@ -44,7 +46,7 @@ const KPICards = () => {
         transition={{ delay: 0.3 }}
       >
         <StatCard
-          title="Grid Frequency"
+          title={t('kpi.gridFrequency')}
           value={50.0}
           unit="Hz"
           icon={TrendingUp}
@@ -60,7 +62,7 @@ const KPICards = () => {
         transition={{ delay: 0.4 }}
       >
         <StatCard
-          title="Solar PV Generation"
+          title={t('kpi.solarGeneration')}
           value={156.8}
           unit="kW"
           icon={Zap}
@@ -76,7 +78,7 @@ const KPICards = () => {
         transition={{ delay: 0.5 }}
       >
         <StatCard
-          title="Battery SOC"
+          title={t('kpi.batterySOC')}
           value={72.5}
           unit="%"
           icon={Battery}
@@ -92,7 +94,7 @@ const KPICards = () => {
         transition={{ delay: 0.6 }}
       >
         <StatCard
-          title="Load Demand"
+          title={t('kpi.loadDemand')}
           value={189.3}
           unit="kW"
           icon={Cpu}
@@ -108,7 +110,7 @@ const KPICards = () => {
         transition={{ delay: 0.7 }}
       >
         <StatCard
-          title="Efficiency"
+          title={t('kpi.efficiency')}
           value={92.8}
           unit="%"
           icon={Gauge}
@@ -124,7 +126,7 @@ const KPICards = () => {
         transition={{ delay: 0.8 }}
       >
         <StatCard
-          title="Power Factor"
+          title={t('kpi.powerFactor')}
           value={0.95}
           unit=""
           icon={TrendingUp}

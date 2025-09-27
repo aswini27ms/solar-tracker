@@ -5,6 +5,7 @@ import LottieAnimation from "./LottieAnimation";
 import loginAnimation from "../assets/animations/login.json";
 import UserLogin from "./UserLogin";
 import AdminLogin from "./AdminLogin";
+import { useTranslation } from "react-i18next";
 
 interface LoginProps {
   setActiveTab: (tab: string) => void;
@@ -12,6 +13,8 @@ interface LoginProps {
 
 const Login: React.FC<LoginProps> = ({ setActiveTab }) => {
   const [selectedRole, setSelectedRole] = useState<'user' | 'admin' | null>(null);
+
+  const { t } = useTranslation();
 
 
   // If a role is selected, render the appropriate login component
@@ -62,7 +65,7 @@ const Login: React.FC<LoginProps> = ({ setActiveTab }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
             >
-              Welcome to SolarTrack
+              {t('login_welcome_title')}
             </motion.h1>
             <motion.p 
               className="text-lg text-blue-800 dark:text-blue-200 mb-6 leading-relaxed"
@@ -70,7 +73,7 @@ const Login: React.FC<LoginProps> = ({ setActiveTab }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
             >
-              Your intelligent solar energy management platform. Please select your role to continue.
+              {t('login_welcome_desc')}
             </motion.p>
             
             {/* Feature Highlights */}
@@ -82,19 +85,19 @@ const Login: React.FC<LoginProps> = ({ setActiveTab }) => {
             >
               <div className="flex items-center space-x-3 p-3 bg-white/50 dark:bg-gray-800/50 rounded-lg backdrop-blur-sm">
                 <span className="text-2xl">📊</span>
-                <span className="text-gray-700 dark:text-gray-200 font-medium">Real-time Analytics</span>
+                <span className="text-gray-700 dark:text-gray-200 font-medium">{t('login_feature_realtime_analytics')}</span>
               </div>
               <div className="flex items-center space-x-3 p-3 bg-white/50 dark:bg-gray-800/50 rounded-lg backdrop-blur-sm">
                 <span className="text-2xl">🔋</span>
-                <span className="text-gray-700 dark:text-gray-200 font-medium">Energy Optimization</span>
+                <span className="text-gray-700 dark:text-gray-200 font-medium">{t('login_feature_energy_optimization')}</span>
               </div>
               <div className="flex items-center space-x-3 p-3 bg-white/50 dark:bg-gray-800/50 rounded-lg backdrop-blur-sm">
                 <span className="text-2xl">💰</span>
-                <span className="text-gray-700 dark:text-gray-200 font-medium">Cost Savings</span>
+                <span className="text-gray-700 dark:text-gray-200 font-medium">{t('login_feature_cost_savings')}</span>
               </div>
               <div className="flex items-center space-x-3 p-3 bg-white/50 dark:bg-gray-800/50 rounded-lg backdrop-blur-sm">
                 <span className="text-2xl">🌱</span>
-                <span className="text-gray-700 dark:text-gray-200 font-medium">Eco-Friendly</span>
+                <span className="text-gray-700 dark:text-gray-200 font-medium">{t('login_feature_eco_friendly')}</span>
               </div>
             </motion.div>
           </div>
@@ -111,10 +114,10 @@ const Login: React.FC<LoginProps> = ({ setActiveTab }) => {
               {/* Header */}
               <div className="text-center mb-8">
                 <h2 className="text-3xl font-bold text-orange-700 dark:text-yellow-100 mb-2">
-                  Choose Your Role
+                  {t('login_choose_role_title')}
                 </h2>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Select how you want to access SolarTrack
+                  {t('login_choose_role_desc')}
                 </p>
               </div>
 
@@ -132,9 +135,9 @@ const Login: React.FC<LoginProps> = ({ setActiveTab }) => {
                       <User className="w-6 h-6 text-orange-600 dark:text-orange-400" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-orange-700 dark:text-orange-300 mb-1">User Access</h3>
+                      <h3 className="text-xl font-semibold text-orange-700 dark:text-orange-300 mb-1">{t('login_user_access_title')}</h3>
                       <p className="text-gray-600 dark:text-gray-400 text-sm">
-                        Monitor your solar panels, track energy production, and view analytics
+                        {t('login_user_access_desc')}
                       </p>
                     </div>
                     <ArrowRight className="w-5 h-5 text-orange-400 group-hover:text-orange-600 dark:group-hover:text-orange-300 transition-colors" />
@@ -153,9 +156,9 @@ const Login: React.FC<LoginProps> = ({ setActiveTab }) => {
                       <Shield className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-blue-700 dark:text-blue-300 mb-1">Admin Access</h3>
+                      <h3 className="text-xl font-semibold text-blue-700 dark:text-blue-300 mb-1">{t('login_admin_access_title')}</h3>
                       <p className="text-gray-600 dark:text-gray-400 text-sm">
-                        Manage users, system settings, and oversee all operations
+                        {t('login_admin_access_desc')}
                       </p>
                     </div>
                     <ArrowRight className="w-5 h-5 text-blue-400 group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors" />
@@ -166,7 +169,7 @@ const Login: React.FC<LoginProps> = ({ setActiveTab }) => {
               {/* Additional Info */}
               <div className="mt-8 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
                 <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
-                  Don't have an account? You can create one after selecting your role.
+                  {t('login_no_account')}
                 </p>
               </div>
             </div>

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Eye, EyeOff, Mail, Lock, User, ArrowRight, Phone } from "lucide-react";
 import LottieAnimation from "./LottieAnimation";
 import loginAnimation from "../assets/animations/login.json";
+import { useTranslation } from "react-i18next";
 
 interface AdminLoginProps {
   setActiveTab: (tab: string) => void;
@@ -20,6 +21,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ setActiveTab, onBackToRoleSelec
   const [isLoading, setIsLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [activeAuthTab, setActiveAuthTab] = useState("login"); // login or signup
+  const { t } = useTranslation();
   const { setUser } = useUser();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -103,7 +105,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ setActiveTab, onBackToRoleSelec
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
             >
-              Welcome to SolarTrack
+              {t('admin_welcome_title')}
             </motion.h1>
             <motion.p 
               className="text-lg text-blue-800 dark:text-blue-200 mb-6 leading-relaxed"
@@ -111,7 +113,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ setActiveTab, onBackToRoleSelec
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
             >
-              Your intelligent solar energy management platform. Monitor, optimize, and maximize your renewable energy potential with advanced analytics and real-time insights.
+              {t('admin_welcome_desc')}
             </motion.p>
             
             {/* Feature Highlights */}
@@ -123,19 +125,19 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ setActiveTab, onBackToRoleSelec
             >
               <div className="flex items-center space-x-3 p-3 bg-white/50 dark:bg-gray-800/50 rounded-lg backdrop-blur-sm">
                 <span className="text-2xl">📊</span>
-                <span className="text-gray-700 dark:text-gray-200 font-medium">Real-time Analytics</span>
+                <span className="text-gray-700 dark:text-gray-200 font-medium">{t('admin_feature_realtime_analytics')}</span>
               </div>
               <div className="flex items-center space-x-3 p-3 bg-white/50 dark:bg-gray-800/50 rounded-lg backdrop-blur-sm">
                 <span className="text-2xl">🔋</span>
-                <span className="text-gray-700 dark:text-gray-200 font-medium">Energy Optimization</span>
+                <span className="text-gray-700 dark:text-gray-200 font-medium">{t('admin_feature_energy_optimization')}</span>
               </div>
               <div className="flex items-center space-x-3 p-3 bg-white/50 dark:bg-gray-800/50 rounded-lg backdrop-blur-sm">
                 <span className="text-2xl">💰</span>
-                <span className="text-gray-700 dark:text-gray-200 font-medium">Cost Savings</span>
+                <span className="text-gray-700 dark:text-gray-200 font-medium">{t('admin_feature_cost_savings')}</span>
               </div>
               <div className="flex items-center space-x-3 p-3 bg-white/50 dark:bg-gray-800/50 rounded-lg backdrop-blur-sm">
                 <span className="text-2xl">🌱</span>
-                <span className="text-gray-700 dark:text-gray-200 font-medium">Eco-Friendly</span>
+                <span className="text-gray-700 dark:text-gray-200 font-medium">{t('admin_feature_eco_friendly')}</span>
               </div>
             </motion.div>
           </div>
@@ -159,7 +161,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ setActiveTab, onBackToRoleSelec
                       : "text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-yellow-300"
                   }`}
                 >
-                  Admin Login
+                  {t('admin_login_tab')}
                 </button>
                 <button
                   onClick={() => setActiveAuthTab("signup")}
@@ -169,19 +171,19 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ setActiveTab, onBackToRoleSelec
                       : "text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-yellow-300"
                   }`}
                 >
-                  Register Admin
+                  {t('admin_signup_tab')}
                 </button>
               </div>
 
               {/* Form Header */}
               <div className="text-center mb-6">
                 <h2 className="text-3xl font-bold text-orange-700 dark:text-yellow-100 mb-2">
-                  {activeAuthTab === "login" ? "Admin Login" : "Admin Registration"}
+                  {activeAuthTab === "login" ? t('admin_login_header') : t('admin_signup_header')}
                 </h2>
                 <p className="text-gray-600 dark:text-gray-300">
                   {activeAuthTab === "login" 
-                    ? "Sign in to access your admin dashboard" 
-                    : "Create your admin account and start managing"
+                    ? t('admin_login_desc')
+                    : t('admin_signup_desc')
                   }
                 </p>
               </div>
@@ -209,7 +211,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ setActiveTab, onBackToRoleSelec
                       transition={{ duration: 0.3 }}
                     >
                       <label className="block text-gray-700 dark:text-gray-200 mb-2 font-medium">
-                        Admin Name
+                        {t('admin_name_label')}
                       </label>
                       <div className="relative">
                         <User className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
@@ -218,7 +220,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ setActiveTab, onBackToRoleSelec
                           value={name}
                           onChange={e => setName(e.target.value)}
                           className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
-                          placeholder="Enter administrator name"
+                          placeholder={t('admin_name_placeholder')}
                           required
                         />
                       </div>
@@ -229,7 +231,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ setActiveTab, onBackToRoleSelec
                       transition={{ duration: 0.3 }}
                     >
                       <label className="block text-gray-700 dark:text-gray-200 mb-2 font-medium">
-                        Admin Phone
+                        {t('admin_phone_label')}
                       </label>
                       <div className="relative">
                         <Phone className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
@@ -238,7 +240,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ setActiveTab, onBackToRoleSelec
                           value={phone}
                           onChange={e => setPhone(e.target.value)}
                           className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
-                          placeholder="Enter administrator phone"
+                          placeholder={t('admin_phone_placeholder')}
                           required
                         />
                       </div>
@@ -249,7 +251,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ setActiveTab, onBackToRoleSelec
                 {/* Email Field */}
                 <div>
                   <label className="block text-gray-700 dark:text-gray-200 mb-2 font-medium">
-                    Admin Email
+                    {t('admin_email_label')}
                   </label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
@@ -258,7 +260,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ setActiveTab, onBackToRoleSelec
                       value={email}
                       onChange={e => setEmail(e.target.value)}
                       className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
-                      placeholder="Enter admin email"
+                      placeholder={t('admin_email_placeholder')}
                       required
                     />
                   </div>
@@ -267,7 +269,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ setActiveTab, onBackToRoleSelec
                 {/* Password Field */}
                 <div>
                   <label className="block text-gray-700 dark:text-gray-200 mb-2 font-medium">
-                    Admin Password
+                    {t('admin_password_label')}
                   </label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
@@ -276,7 +278,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ setActiveTab, onBackToRoleSelec
                       value={password}
                       onChange={e => setPassword(e.target.value)}
                       className="w-full pl-11 pr-12 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all"
-                      placeholder="Enter admin password"
+                      placeholder={t('admin_password_placeholder')}
                       required
                     />
                     <button
@@ -288,7 +290,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ setActiveTab, onBackToRoleSelec
                     </button>
                   </div>
                   <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                    Password must be at least 8 characters long
+                    {t('admin_password_hint')}
                   </p>
                 </div>
 
@@ -302,7 +304,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ setActiveTab, onBackToRoleSelec
                         onChange={e => setRememberMe(e.target.checked)}
                         className="w-4 h-4 accent-orange-500 rounded"
                       />
-                      <span className="text-gray-600 dark:text-gray-300">Remember me on this device</span>
+                      <span className="text-gray-600 dark:text-gray-300">{t('admin_remember_me')}</span>
                     </label>
                   </div>
                 )}
@@ -319,7 +321,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ setActiveTab, onBackToRoleSelec
                     <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                   ) : (
                     <>
-                      <span>{activeAuthTab === "login" ? "Access Admin Panel" : "Create Admin Account"}</span>
+                      <span>{activeAuthTab === "login" ? t('admin_login_btn') : t('admin_signup_btn')}</span>
                       <ArrowRight className="w-5 h-5" />
                     </>
                   )}
@@ -333,7 +335,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ setActiveTab, onBackToRoleSelec
                   onClick={onBackToRoleSelection}
                   className="text-orange-600 dark:text-yellow-400 hover:underline font-medium"
                 >
-                  ← Back to role selection
+                  {t('admin_back_to_role')}
                 </button>
               </div>
             </div>
